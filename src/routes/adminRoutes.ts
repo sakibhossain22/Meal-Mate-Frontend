@@ -1,16 +1,28 @@
 export const adminRoutes = [
     {
-        title: "Getting Started",
+        title: "",
         url: "#",
         items: [
             {
-                title: "Admin Overview",
-                url: "/analatics",
+                title: "Admin Profile",
+                url: "/admin-Profile",
             },
             {
-                title: "User Management",
+                title: "Admin Stats",
+                url: "/admin-stats",
+            },
+            {
+                title: "Manage User",
                 url: "/manage-user",
             },
+            {
+                title: "Manage Category",
+                url: "/manage-category",
+            },
+            {
+                title: "Manage Orders",
+                url: "/manage-orders",
+            }
         ],
     }
 ]

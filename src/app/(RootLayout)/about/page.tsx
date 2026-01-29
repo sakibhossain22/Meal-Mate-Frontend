@@ -1,17 +1,7 @@
-"use client"
 
-import { getBlogPosts } from "@/actions/meal.action";
-import { useEffect, useState } from "react"
 
 export default function AboutPage() {
-    const [data, setData] = useState()
-    console.log(data);
-    useEffect(() => {
-        (async function () {
-            const data = await getBlogPosts()
-            setData(data.data.posts)
-        })();
-    }, [])
+
     return (
         <div className='flex items-center justify-center h-screen '>
             <div>

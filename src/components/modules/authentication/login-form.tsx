@@ -42,6 +42,7 @@ export function LoginForm(props: React.ComponentProps<typeof Card>) {
       onSubmit: formSchema
     },
     onSubmit: async ({ value }) => {
+      console.log(value);
       const toastId = toast.loading("Login User....")
       try {
         const { data, error } = await authClient.signIn.email(value)

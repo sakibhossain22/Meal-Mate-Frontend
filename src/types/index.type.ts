@@ -27,5 +27,17 @@ export interface PostData {
     }
 }
 export interface mealType {
-    
+
+}
+export interface ReviewType {
+    id: string,
+    rating: number,
+    comment: string,
+    customerId: string,
+    mealId: string,
+    customer: {
+        email: string,
+        name: string,
+        image: string | null
+    }
 }

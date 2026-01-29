@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/sheet";
 import { Accordion } from "@/components/ui/accordion";
 import { ModeToggle } from "./ModeToggle";
+import { userService } from "@/app/services/userService";
+import { userSessionAction } from "@/actions/meal.action";
 
 interface MenuItem {
   title: string;
@@ -41,11 +43,15 @@ interface Navbar1Props {
     };
   };
 }
-
+// const userSession = async () => {
+//   const session = await userSessionAction()
+//   return session
+// // }
+// console.log(userSession);
 const Navbar1 = ({
   menu = [
     { title: "Home", url: "/" },
-    { title: "Blog", url: "/blog" },
+    { title: "Meals", url: "/meals" },
     { title: "About", url: "/about" },
     { title: "Dashboard", url: "/dashboard" },
   ],
