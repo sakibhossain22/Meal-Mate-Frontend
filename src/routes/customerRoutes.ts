@@ -4,6 +4,10 @@ export const customerRoutes = [
         url: "#",
         items: [
             {
+                title: "Home",
+                url: "/",
+            },  
+            {
                 title: "Profile",
                 url: "/dashboard/customer/customer-profile",
             },  

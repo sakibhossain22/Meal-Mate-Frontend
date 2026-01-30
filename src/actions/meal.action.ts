@@ -141,7 +141,7 @@ export async function deleteMealProvider(id: string) {
 // Update Meal
 export async function updateMeal(id: string, formData: FormData) {
   const cookieStore = await cookies();
-  
+
   const name = formData.get("name");
   const description = formData.get("description");
   const price = formData.get("price");
@@ -176,4 +176,32 @@ export async function updateMeal(id: string, formData: FormData) {
 
   const result = await res.json();
   return result;
+}
+
+// Meal Review
+
+
+export async function addReview(rating: number, comment: string, mealId: string, userId: string) {
+  console.log();
+  const review = {
+    rating,
+    comment,
+    mealId,
+    customerId: userId
+  }
+
+  const cookieStore = await cookies();
+  const res = await fetch(`${API_URL}/meal/review`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify(review),
+  });
+
+  const data = await res.json();
+  // console.log(data);
+  if (res.ok) revalidatePath(`/meals/${mealId}`);
+  return data;
 }

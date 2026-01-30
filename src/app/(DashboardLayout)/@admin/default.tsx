@@ -1,3 +1,6 @@
-export default function page() {
-    return (<div>admin default page</div>)
+import { redirect } from "next/navigation"
+
+export default async function page() {
+    return redirect("/dashboard/admin/admin-profile")
+    
 }

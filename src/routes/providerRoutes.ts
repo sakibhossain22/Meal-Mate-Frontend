@@ -4,6 +4,10 @@ export const providerRoutes = [
         url: "#",
         items: [
             {
+                title: "Home",
+                url: "/",
+            },
+            {
                 title: "Profile",
                 url: "/dashboard/provider/provider-profile",
             },

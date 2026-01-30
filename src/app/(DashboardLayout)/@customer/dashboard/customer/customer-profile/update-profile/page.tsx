@@ -20,7 +20,7 @@ export default function UpdateProfile() {
         const result = await updateProviderProfile(formData);
 
         if (result) {
-            redirect('/dashboard/provider/provider-profile')
+            redirect('/dashboard/customer/customer-profile')
         }
         if (result.success || result.ok) {
             toast.success("Profile updated successfully!");

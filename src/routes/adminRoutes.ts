@@ -4,6 +4,10 @@ export const adminRoutes = [
         url: "#",
         items: [
             {
+                title: "Home",
+                url: "/",
+            },
+            {
                 title: "Admin Profile",
                 url: "/dashboard/admin/admin-Profile",
             },

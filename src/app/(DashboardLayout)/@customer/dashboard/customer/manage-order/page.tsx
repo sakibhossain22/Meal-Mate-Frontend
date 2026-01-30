@@ -1,10 +1,10 @@
 import { customerOrder } from "@/actions/customer.action";
-import { 
-    Package, 
-    Clock, 
-    CheckCircle2, 
-    ChevronRight, 
-    Receipt, 
+import {
+    Package,
+    Clock,
+    CheckCircle2,
+    ChevronRight,
+    Receipt,
     Utensils,
     Calendar,
     ArrowUpRight
@@ -19,7 +19,7 @@ export default async function ManageOrders() {
     return (
         <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200">
             <div className="max-w-5xl mx-auto">
-                
+
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
                     <div>
@@ -39,7 +39,7 @@ export default async function ManageOrders() {
                     {orders.length > 0 ? (
                         orders.map((order: any) => (
                             <div key={order.id} className="group relative bg-slate-900/40 border border-slate-800 rounded-[2.5rem] overflow-hidden transition-all hover:border-slate-700 hover:bg-slate-900/60">
-                                
+
                                 {/* Top Bar: Status & ID */}
                                 <div className="p-6 md:p-8 border-b border-slate-800/50 flex flex-wrap items-center justify-between gap-4">
                                     <div className="flex items-center gap-4">
@@ -49,11 +49,10 @@ export default async function ManageOrders() {
                                         <div>
                                             <div className="flex items-center gap-2">
                                                 <p className="text-sm font-bold text-white">Order #{order.id.slice(0, 8).toUpperCase()}</p>
-                                                <span className={`text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider ${
-                                                    order.status === 'PENDING' 
-                                                    ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' 
-                                                    : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
-                                                }`}>
+                                                <span className={`text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider ${order.status === 'PENDING'
+                                                        ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
+                                                        : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
+                                                    }`}>
                                                     {order.status}
                                                 </span>
                                             </div>
@@ -105,15 +104,7 @@ export default async function ManageOrders() {
                                                 <p className="text-slate-500 italic">Pending Provider Confirmation</p>
                                             </div>
                                         </div>
-                                        
-                                        <div className="mt-8 flex gap-3">
-                                            <Button className="flex-1 bg-white text-black hover:bg-slate-200 rounded-2xl font-bold h-12 shadow-xl">
-                                                Invoice
-                                            </Button>
-                                            <Button variant="outline" className="flex-1 border-slate-700 text-slate-400 hover:bg-slate-800 rounded-2xl h-12 font-bold">
-                                                Help Support
-                                            </Button>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

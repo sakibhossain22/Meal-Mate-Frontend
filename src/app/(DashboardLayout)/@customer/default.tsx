@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function page() {
-    return redirect("/user-profile")
+    return redirect("/dashboard/customer/customer-profile")
 }

@@ -45,13 +45,10 @@ export async function updateOrderStatus(id: string, status: string) {
     },
     body: JSON.stringify(statusData),
   });
-
   const result = await res.json();
-
   if (res.ok) {
     revalidatePath("/dashboard/provider/incoming-orders");
     return { success: true, data: result };
   }
-
   return { success: false, error: result.error };
 }
