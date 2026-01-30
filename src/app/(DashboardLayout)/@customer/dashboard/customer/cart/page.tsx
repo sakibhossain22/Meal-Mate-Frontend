@@ -10,9 +10,11 @@ import {
   ShieldCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { deleteCartItem } from "@/actions/cart.action";
+import { createOrderAction } from "@/actions/order.action";
 
 export default async function Cart() {
-  
+
   const response = await getCart();
   const carts = response?.data || [];
 
@@ -58,9 +60,11 @@ export default async function Cart() {
                     <span className="font-bold text-sm w-4 text-center">{item.quantity}</span>
                     <button className="p-1 hover:text-orange-500 transition-colors"><Plus size={16} /></button>
                   </div>
-                  <button className="p-3 text-slate-600 hover:text-rose-500 hover:bg-rose-500/5 rounded-xl transition-all">
-                    <Trash2 size={20} />
-                  </button>
+                  <form action={deleteCartItem.bind(null, item.id)}>
+                    <button className="p-3 text-slate-600 hover:text-rose-500 hover:bg-rose-500/5 rounded-xl transition-all">
+                      <Trash2 size={20} />
+                    </button>
+                  </form>
                 </div>
               ))}
             </div>
@@ -86,10 +90,12 @@ export default async function Cart() {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-600 hover:bg-orange-500 text-white h-14 rounded-2xl font-black text-lg shadow-lg shadow-orange-950/20 group">
-                CHECKOUT NOW
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <form action={createOrderAction.bind(null, allItems, total)}>
+                <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-500 text-white h-14 rounded-2xl font-black text-lg shadow-lg shadow-orange-950/20 group">
+                  CHECKOUT NOW
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </form>
 
               <div className="mt-6 flex items-center justify-center gap-2 text-[10px] text-slate-600 font-bold uppercase tracking-widest">
                 <ShieldCheck size={14} className="text-emerald-500" />

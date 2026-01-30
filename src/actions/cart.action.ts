@@ -6,7 +6,8 @@ import { cookies } from "next/headers";
 const API_URL = env.API_URL
 
 
-export async function deleteMealProvider(id: string) {
+export async function deleteCartItem(id: string) {
+    console.log(id);
     const cookieStore = await cookies();
     const res = await fetch(`${API_URL}/cart/${id}`, {
         method: "DELETE",

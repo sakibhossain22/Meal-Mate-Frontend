@@ -1,8 +1,10 @@
 "use server"
 
+import { userService } from "@/app/services/userService";
 import { env } from "@/env";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 const API_URL = env.API_URL
 // incoming order
 export async function incomingOrder() {
@@ -51,4 +53,36 @@ export async function updateOrderStatus(id: string, status: string) {
     return { success: true, data: result };
   }
   return { success: false, error: result.error };
+}
+
+export async function createOrderAction(cartItems: any[], totalPrice: number) {
+
+  const session = await userService.getSession();
+  const user = session?.data?.user;
+  const cookieStore = await cookies()
+
+  if (!user) {
+    return { success: false, message: "Please login to place an order." };
+  }
+
+
+  const res = await fetch(`${API_URL}/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify({
+      totalPrice,
+      items: cartItems
+    }),
+  });
+  const result = await res.json();
+  console.log(result);
+  if (res.ok) {
+    revalidatePath("/dashboard/customer/cart");
+    redirect("/dashboard/customer/manage-order")
+    return result;
+  }
+
 }
