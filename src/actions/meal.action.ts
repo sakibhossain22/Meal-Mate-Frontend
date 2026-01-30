@@ -4,7 +4,10 @@ import { mealService } from "@/app/services/meal.service"
 import { unstable_noStore as noStore } from "next/cache"
 import { userService } from "@/app/services/userService"
 import { cookies } from "next/headers"
+<<<<<<< HEAD
 import { MealType } from "@/types/index.type"
+=======
+>>>>>>> 1a4a69fe07f0e65f0ecebcfb2f6b9ca1fa9ca1a9
 
 
 
@@ -94,6 +97,7 @@ export async function providerMeal() {
   const session = await userService.getSession()
   const filteredData = data?.data?.meals.filter((data: any) => data.provider.userId === session.data.user.id)
   return filteredData
+<<<<<<< HEAD
 }
 
 // Addd neww Meal
@@ -116,3 +120,6 @@ export async function addMeal(formData: MealType) {
   console.log(data);
   return data;
 }
+=======
+}
+>>>>>>> 1a4a69fe07f0e65f0ecebcfb2f6b9ca1fa9ca1a9

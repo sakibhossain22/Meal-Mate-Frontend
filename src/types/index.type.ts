@@ -40,6 +40,7 @@ export interface ReviewType {
         name: string,
         image: string | null
     }
+<<<<<<< HEAD
 }
 export interface MealType {
     name: string;
@@ -49,3 +50,6 @@ export interface MealType {
     categoryId: string;
 
 }
+=======
+}
+>>>>>>> 1a4a69fe07f0e65f0ecebcfb2f6b9ca1fa9ca1a9

@@ -17,7 +17,11 @@ export async function incomingOrder() {
 }
 export async function providerStats() {
   const cookieStore = await cookies()
+<<<<<<< HEAD
   const res = await fetch(`${API_URL}/provider/provider/stats`, {
+=======
+  const res = await fetch(`${API_URL}/provider/stats`, {
+>>>>>>> 1a4a69fe07f0e65f0ecebcfb2f6b9ca1fa9ca1a9
     headers: {
       Cookie: cookieStore.toString()
     }
