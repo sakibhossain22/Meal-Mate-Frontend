@@ -1,4 +1,4 @@
-import { providerMeal } from "@/actions/meal.action";
+import { deleteMealProvider, providerMeal } from "@/actions/meal.action";
 import {
   Edit,
   Trash2,
@@ -105,12 +105,28 @@ export default async function ManageMeal() {
                     {/* Actions */}
                     <td className="p-6 text-right">
                       <div className="flex justify-end gap-2">
-                        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-blue-500/10 hover:text-blue-500">
-                          <Edit size={18} />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-rose-500/10 hover:text-rose-500">
-                          <Trash2 size={18} />
-                        </Button>
+                        {/* Edit Button: ID onujayi edit page-e niye jabe */}
+                        <Link href={`/dashboard/provider/manage-meal/edit-meal/${meal.id}`}>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-9 w-9 rounded-xl hover:bg-blue-500/10 hover:text-blue-500"
+                          >
+                            <Edit size={18} />
+                          </Button>
+                        </Link>
+
+                        {/* Delete Form: Server Action bind kora hoyeche */}
+                        <form action={deleteMealProvider.bind(null, meal.id)}>
+                          <Button
+                            type="submit"
+                            variant="ghost"
+                            size="icon"
+                            className="h-9 w-9 rounded-xl hover:bg-rose-500/10 hover:text-rose-500"
+                          >
+                            <Trash2 size={18} />
+                          </Button>
+                        </form>
                       </div>
                     </td>
                   </tr>

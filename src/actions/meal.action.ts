@@ -1,13 +1,11 @@
 "use server"
 import { env } from "@/env"
 import { mealService } from "@/app/services/meal.service"
-import { unstable_noStore as noStore } from "next/cache"
 import { userService } from "@/app/services/userService"
 import { cookies } from "next/headers"
-<<<<<<< HEAD
 import { MealType } from "@/types/index.type"
-=======
->>>>>>> 1a4a69fe07f0e65f0ecebcfb2f6b9ca1fa9ca1a9
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation"
 
 
 
@@ -97,7 +95,12 @@ export async function providerMeal() {
   const session = await userService.getSession()
   const filteredData = data?.data?.meals.filter((data: any) => data.provider.userId === session.data.user.id)
   return filteredData
-<<<<<<< HEAD
+}
+export async function getSingleMeal(id: string) {
+  const cookieStore = await cookies()
+  const res = await fetch(`${API_URL}/meal/${id}`)
+  const data = await res.json()
+  return data
 }
 
 // Addd neww Meal
@@ -120,6 +123,57 @@ export async function addMeal(formData: MealType) {
   console.log(data);
   return data;
 }
-=======
+
+// delete meal 
+export async function deleteMealProvider(id: string) {
+  const cookieStore = await cookies();
+  const res = await fetch(`${API_URL}/meal/delete-meal/${id}`, {
+    method: "DELETE",
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  revalidatePath("/dashboard/provider/manage-meal");
+  const data = await res.json();
+  return data;
 }
->>>>>>> 1a4a69fe07f0e65f0ecebcfb2f6b9ca1fa9ca1a9
+
+// Update Meal
+export async function updateMeal(id: string, formData: FormData) {
+  const cookieStore = await cookies();
+  
+  const name = formData.get("name");
+  const description = formData.get("description");
+  const price = formData.get("price");
+  const categoryId = formData.get("categoryId");
+  const isAvailable = formData.get("isAvailable") === "true";
+  const image = formData.get("image");
+
+  console.log("Extracted Data:", { name, price, id });
+
+  const payload = {
+    name,
+    description,
+    price: parseFloat(price as string),
+    categoryId,
+    isAvailable,
+    image
+  };
+
+  const res = await fetch(`${API_URL}/meal/update-meal/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (res.ok) {
+    revalidatePath("/dashboard/provider/manage-meal");
+    redirect("/dashboard/provider/manage-meal");
+  }
+
+  const result = await res.json();
+  return result;
+}

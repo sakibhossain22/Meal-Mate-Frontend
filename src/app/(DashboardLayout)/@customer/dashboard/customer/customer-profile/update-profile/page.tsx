@@ -18,7 +18,7 @@ export default function UpdateProfile() {
         setLoading(true);
 
         const result = await updateProviderProfile(formData);
-        console.log(result);
+
         if (result) {
             redirect('/dashboard/provider/provider-profile')
         }

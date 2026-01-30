@@ -13,10 +13,10 @@ import {
     PhoneCallIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function CustomerProfile() {
     const { data } = await profile();
-    console.log(data);
     const user = data;
 
     if (!user) return <div className="text-white p-10">User not found.</div>;
@@ -81,10 +81,12 @@ export default async function CustomerProfile() {
                         </div>
 
                         <div className="md:ml-auto">
-                            <Button className="bg-white text-black hover:bg-slate-200 font-bold px-6 py-6 rounded-2xl flex gap-2">
-                                <Settings size={20} />
-                                Edit Profile
-                            </Button>
+                            <Link href={`/dashboard/customer/customer-profile/update-profile`}>
+                                <Button className="bg-white text-black hover:bg-slate-200 font-bold px-6 py-6 rounded-2xl flex gap-2">
+                                    <Settings size={20} />
+                                    Edit Profile
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 </div>
