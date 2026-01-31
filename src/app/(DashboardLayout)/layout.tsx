@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/sidebar"
 import { userService } from "../services/userService";
 import { redirect } from "next/navigation";
+import { Toaster } from "sonner";
 
 interface LayoutProps {
   customer: React.ReactNode;
@@ -58,6 +59,7 @@ export default async function Page({ customer, admin, provider }: LayoutProps) {
             </div>
           </main>
         </div>
+        <Toaster richColors />
       </SidebarInset>
     </SidebarProvider>
   )
