@@ -26,6 +26,10 @@ export const adminRoutes = [
             {
                 title: "Manage Orders",
                 url: "/dashboard/admin/manage-orders",
+            },
+            {
+                title: "Customer Reviews",
+                url: "/dashboard/admin/customer-reviews",
             }
         ],
     }
