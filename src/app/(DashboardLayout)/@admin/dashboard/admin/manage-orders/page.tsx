@@ -119,16 +119,6 @@ export default async function ManageOrders() {
                                             </div>
                                         ))}
                                     </div>
-
-                                    {/* Action Buttons */}
-                                    <div className="mt-8 flex gap-4">
-                                        <Button className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl h-12 font-bold shadow-lg shadow-emerald-900/20">
-                                            APPROVE ORDER
-                                        </Button>
-                                        <Button variant="outline" className="flex-1 border-slate-700 text-slate-400 hover:bg-rose-500/10 hover:text-rose-500 rounded-2xl h-12 font-bold">
-                                            REJECT
-                                        </Button>
-                                    </div>
                                 </div>
                             </div>
                         );

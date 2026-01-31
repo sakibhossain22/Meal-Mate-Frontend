@@ -1,15 +1,16 @@
 import { adminAllCategory } from "@/actions/meal.action";
-import { 
-    Layers, 
-    ChevronRight, 
-    UtensilsCrossed, 
-    Plus, 
+import {
+    Layers,
+    ChevronRight,
+    UtensilsCrossed,
+    Plus,
     MoreHorizontal,
     Package,
     Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function ManageCategory() {
     const response = await adminAllCategory();
@@ -28,17 +29,19 @@ export default async function ManageCategory() {
                         <h1 className="text-4xl font-black text-white">Menu Categories</h1>
                         <p className="text-slate-500 mt-2 text-lg">Organize your meals and monitor category stock levels.</p>
                     </div>
-                    <Button className="bg-orange-600 hover:bg-orange-500 text-white font-bold px-6 py-6 rounded-2xl flex gap-2 shadow-lg shadow-orange-900/20 active:scale-95 transition-all">
-                        <Plus size={20} />
-                        ADD NEW CATEGORY
-                    </Button>
+                    <Link href={`/dashboard/admin/manage-category/add-category`}>
+                        <Button className="bg-orange-600 hover:bg-orange-500 text-white font-bold px-6 py-6 rounded-2xl flex gap-2 shadow-lg shadow-orange-900/20 active:scale-95 transition-all">
+                            <Plus size={20} />
+                            ADD NEW CATEGORY
+                        </Button>
+                    </Link>
                 </header>
 
                 {/* Categories Grid */}
                 <div className="grid grid-cols-1 gap-10">
                     {categories.map((category: any) => (
                         <div key={category.id} className="bg-slate-900/40 border border-slate-800 rounded-[2.5rem] overflow-hidden backdrop-blur-sm">
-                            
+
                             {/* Category Banner/Header */}
                             <div className="p-6 md:p-8 border-b border-slate-800 bg-slate-900/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
                                 <div className="flex items-center gap-4">
@@ -67,7 +70,7 @@ export default async function ManageCategory() {
                                                         {meal.isAvailable ? 'AVAILABLE' : 'OUT OF STOCK'}
                                                     </span>
                                                 </div>
-                                                
+
                                                 <div className="flex items-start gap-4">
                                                     <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden">
                                                         {meal.image ? (
