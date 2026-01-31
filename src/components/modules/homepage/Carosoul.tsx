@@ -46,11 +46,11 @@ export async function CarouselSpacing() {
                   </div>
 
                   <p className="mt-2 line-clamp-2 text-sm text-gray-600 dark:text-gray-400">
-                    {meal.description}
+                    {meal.description.slice(0,30) + "..."}
                   </p>
 
                   <Link
-                    href="/meals"
+                    href={`/meals/${meal.id}`}
                     className="
                       mt-4 inline-flex w-full items-center justify-center gap-2
                       rounded-full bg-[#fbb200] px-4 py-2
@@ -61,7 +61,7 @@ export async function CarouselSpacing() {
                     "
                   >
                     <ShoppingCart className="h-5 w-5" />
-                    Order Now
+                    Details
                   </Link>
                 </div>
               </CardContent>

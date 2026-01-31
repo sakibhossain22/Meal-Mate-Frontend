@@ -17,20 +17,32 @@ export async function userSessionAction() {
   const session = await userService.getSession()
   return session
 }
-export async function getAllMeal(params?: {
-  page?: number
-  limit?: number
-}) {
-  const query = new URLSearchParams()
-  if (params?.page) query.append("page", params.page.toString())
-  if (params?.limit) query.append("limit", params.limit.toString())
 
-  const res = await fetch(`${API_URL}/meal?${query.toString()}`, {
-    cache: "no-store", // this forces fresh data on every request
-  })
 
-  return res.json()
+
+export async function getAllMeal(query: string) {
+  console.log(query);
+  // const query = new URLSearchParams();
+  // console.log(query);
+  // if (category)
+  // query.append("category", category);
+  // query.append("page", page.toString());
+  // query.append("limit", limit.toString());
+  // console.log(query);
+  const res = await fetch(`${API_URL}/meal?${query}`, {
+    cache: "no-store",
+  });
+  // console.log(res);
+  if (!res.ok) return { data: { meals: [] } };
+  return res.json();
 }
+
+// export async function handeCategory(value) {
+//   console.log(value);
+// }
+
+
+
 // admin action
 export async function adminStat() {
   const cookieStore = await cookies()

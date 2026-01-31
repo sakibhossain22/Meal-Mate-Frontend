@@ -1,13 +1,15 @@
 import HeroSection from "@/components/modules/homepage/hero";
 import { CarouselSpacing } from "@/components/modules/homepage/Carosoul";
 import { mealService } from "../services/meal.service";
+import OurStory from "@/components/modules/homepage/OurStory";
+import Strenght from "@/components/modules/homepage/Strenght";
 export default async function Home() {
   const { data } = await mealService.getAllMeal()
   const meals = data?.meals?.slice(0, 8) || []
   return (
-    <div>
+    <div className="">
       <HeroSection />
-      <div className="overflow-x-hidden">
+      <div className="overflow-x-hidden mx-5">
         <div className="container my-6 mb-10 mx-48">
           <div className="flex items-center gap-8">
             <h4 className="text-2xl  font-bold text-[#f22e3e]">Popular Dishes</h4>
@@ -17,6 +19,8 @@ export default async function Home() {
         </div>
         <CarouselSpacing />
       </div>
+      <OurStory />
+      <Strenght />
     </div>
   );
 }
