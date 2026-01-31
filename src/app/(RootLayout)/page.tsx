@@ -3,6 +3,9 @@ import { CarouselSpacing } from "@/components/modules/homepage/Carosoul";
 import { mealService } from "../services/meal.service";
 import OurStory from "@/components/modules/homepage/OurStory";
 import Strenght from "@/components/modules/homepage/Strenght";
+import ClientTestimonials from "@/components/modules/homepage/ClitenTestimonals";
+import RegisterNow from "@/components/modules/homepage/RegisterNow";
+import Footer from "@/components/modules/homepage/Footer";
 export default async function Home() {
   const { data } = await mealService.getAllMeal()
   const meals = data?.meals?.slice(0, 8) || []
@@ -10,7 +13,7 @@ export default async function Home() {
     <div className="">
       <HeroSection />
       <div className="overflow-x-hidden mx-5">
-        <div className="container my-6 mb-10 mx-48">
+        <div className="container my-6 mb-10 mx-28">
           <div className="flex items-center gap-8">
             <h4 className="text-2xl  font-bold text-[#f22e3e]">Popular Dishes</h4>
             <div className="border-2 mt-2 border-[#f22e3e] w-24"></div>
@@ -21,6 +24,9 @@ export default async function Home() {
       </div>
       <OurStory />
       <Strenght />
+      <RegisterNow />
+      <ClientTestimonials />
+      <Footer />
     </div>
   );
 }

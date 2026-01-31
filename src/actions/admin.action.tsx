@@ -68,6 +68,16 @@ export async function getAllReview() {
 
 
 }
+export async function getAllReviewHome() {
+    const cookieStore = await cookies()
+    const res = await fetch(`${API_URL}/admin/all-reviews`, {
+        method: "GET"
+    })
+    const data = await res.json()
+    return data
+
+
+}
 
 
 
@@ -76,7 +86,7 @@ export async function deleteReview(id: string) {
     const cookieStore = await cookies()
 
     const res = await fetch(`${API_URL}/admin/delete-reviews/${id}`, {
-        method : "DELETE",
+        method: "DELETE",
         headers: {
             Cookie: cookieStore.toString()
         }
