@@ -28,7 +28,7 @@ export default async function AdminStats() {
 
     // UI Cards Configuration
     const cards = [
-        { title: "Total Revenue", value: `$${stats.orders.totalRevenue}`, icon: <DollarSign className="text-emerald-400" />, color: "from-emerald-500/20 to-teal-500/20", border: "border-emerald-500/20" },
+        { title: "Total Revenue", value: `$${stats.orders.totalRevenue.toFixed(2)}`, icon: <DollarSign className="text-emerald-400" />, color: "from-emerald-500/20 to-teal-500/20", border: "border-emerald-500/20" },
         { title: "Total Users", value: stats.users.total, icon: <Users className="text-blue-400" />, color: "from-blue-500/20 to-indigo-500/20", border: "border-blue-500/20" },
         { title: "Total Meals", value: stats.meals.total, icon: <Utensils className="text-orange-400" />, color: "from-orange-500/20 to-amber-500/20", border: "border-orange-500/20" },
         { title: "Active Orders", value: stats.orders.total, icon: <ShoppingBag className="text-rose-400" />, color: "from-rose-500/20 to-pink-500/20", border: "border-rose-500/20" }

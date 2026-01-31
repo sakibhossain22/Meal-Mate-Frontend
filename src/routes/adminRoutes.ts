@@ -9,7 +9,7 @@ export const adminRoutes = [
             },
             {
                 title: "Admin Profile",
-                url: "/dashboard/admin/admin-Profile",
+                url: "/dashboard/admin/admin-profile",
             },
             {
                 title: "Admin Stats",

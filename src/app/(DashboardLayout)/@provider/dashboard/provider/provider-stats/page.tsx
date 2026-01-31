@@ -19,7 +19,7 @@ export default async function ProviderStats() {
     const statCards = [
         {
             title: "Total Revenue",
-            value: `$${stats.orders.revenue}`,
+            value: `$${stats.orders.revenue.toFixed(2)}`,
             description: "Lifetime earnings",
             icon: <DollarSign className="text-emerald-500" />,
             bgColor: "bg-emerald-500/10",

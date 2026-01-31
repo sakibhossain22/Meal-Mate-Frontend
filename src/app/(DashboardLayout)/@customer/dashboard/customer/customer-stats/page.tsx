@@ -21,7 +21,7 @@ export default async function CustomerStats() {
     const summaryCards = [
         {
             title: "Total Spent",
-            value: `$${stats.totalSpent}`,
+            value: `$${stats.totalSpent.toFixed(2)}`,
             icon: <Wallet className="text-emerald-400" />,
             bg: "from-emerald-500/10 to-transparent",
             border: "border-emerald-500/20"
