@@ -11,7 +11,7 @@ export default function ReviewForm({ mealId, userId }: { mealId: string, userId?
     const [comment, setComment] = useState("");
     const [isPending, setIsPending] = useState(false);
     const handlePostReview = async () => {
-        if(!userId)  return toast.error("Please login as Customer First !!");
+        if (!userId) return toast.error("Please login as Customer First !!");
         if (!comment.trim()) return toast.error("Please write a comment!");
         setIsPending(true);
         try {
@@ -62,7 +62,14 @@ export default function ReviewForm({ mealId, userId }: { mealId: string, userId?
                     <Button
                         onClick={handlePostReview}
                         disabled={isPending}
-                        className="w-full md:w-auto h-12 md:h-14 px-10 text-base font-black bg-orange-600 hover:bg-orange-500 text-white rounded-xl shadow-lg transition-all active:scale-95"
+                        className="
+                       inline-flex w-full items-center justify-center gap-2
+                      rounded-full bg-[#fbb200] px-4 py-6
+                      font-semibold text-black
+                      transition-all duration-300
+                      hover:bg-[#f22e3e] hover:text-white hover:shadow-lg
+                      dark:bg-[#f22e3e] dark:text-white dark:hover:bg-[#ff5a67]
+                    "
                     >
                         {isPending ? <Loader2 className="animate-spin" /> : "POST REVIEW"}
                     </Button>

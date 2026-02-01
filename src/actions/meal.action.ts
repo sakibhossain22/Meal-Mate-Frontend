@@ -22,13 +22,7 @@ export async function userSessionAction() {
 
 export async function getAllMeal(query: string) {
   console.log(query);
-  // const query = new URLSearchParams();
-  // console.log(query);
-  // if (category)
-  // query.append("category", category);
-  // query.append("page", page.toString());
-  // query.append("limit", limit.toString());
-  // console.log(query);
+
   const res = await fetch(`${API_URL}/meal?${query}`, {
     cache: "no-store",
   });
@@ -36,10 +30,6 @@ export async function getAllMeal(query: string) {
   if (!res.ok) return { data: { meals: [] } };
   return res.json();
 }
-
-// export async function handeCategory(value) {
-//   console.log(value);
-// }
 
 
 
@@ -194,13 +184,7 @@ export async function updateMeal(id: string, formData: FormData) {
 
 
 export async function addReview(rating: number, comment: string, mealId: string, userId: string) {
-  console.log();
-  const review = {
-    rating,
-    comment,
-    mealId,
-    customerId: userId
-  }
+  const review = { rating, comment, mealId, customerId: userId }
 
   const cookieStore = await cookies();
   const res = await fetch(`${API_URL}/meal/review`, {

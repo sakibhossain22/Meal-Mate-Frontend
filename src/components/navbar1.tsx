@@ -52,7 +52,7 @@ const Navbar1 = ({
   menu = [
     { title: "Home", url: "/" },
     { title: "Meals", url: "/meals" },
-    { title: "About", url: "/about" },
+    { title: "Providers", url: "/providers" },
     { title: "Dashboard", url: "/dashboard" },
   ],
   auth = {

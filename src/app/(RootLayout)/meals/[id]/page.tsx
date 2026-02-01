@@ -15,6 +15,7 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
     const response = await mealService.getSingleMealById(id);
     const data = response?.data;
     const session = await userService.getSession();
+    console.log(session.data.user.role);
 
     if (!data) {
         return (
@@ -31,8 +32,8 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
         );
     }
 
-    const handleAddToCart = addToCart.bind(null, data.id, 1);
-
+    const handleAddToCart = addToCart.bind(null, data.id, 1)
+    console.log(handleAddToCart);
     return (
         <div className="dark:bg-slate-950 text-slate-200 min-h-screen p-4 md:p-10">
             {/* --- Main Product Section --- */}
@@ -84,7 +85,14 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
 
                     <div className="pt-4">
                         <form action={handleAddToCart}>
-                            <Button type="submit" className="h-16 px-10 text-lg font-bold bg-orange-600 hover:bg-orange-500 text-white rounded-2xl shadow-lg shadow-orange-900/20 transition-all active:scale-95 flex gap-3 border-none">
+                            <Button type="submit" className="
+                       inline-flex w-full items-center justify-center gap-2
+                      rounded-full bg-[#fbb200] px-4 py-6
+                      font-semibold text-black
+                      transition-all duration-300
+                      hover:bg-[#f22e3e] hover:text-white hover:shadow-lg
+                      dark:bg-[#f22e3e] dark:text-white dark:hover:bg-[#ff5a67]
+                    ">
                                 <ShoppingCart size={22} />
                                 ADD TO CART
                             </Button>
