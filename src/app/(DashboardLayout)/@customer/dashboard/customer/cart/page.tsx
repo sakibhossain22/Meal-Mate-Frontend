@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { deleteCartItem } from "@/actions/cart.action";
 import { createOrderAction } from "@/actions/order.action";
+import Link from "next/link";
 
 export default async function Cart() {
 
@@ -109,9 +110,11 @@ export default async function Cart() {
             <ShoppingBasket size={64} className="mx-auto text-slate-800 mb-6" />
             <h2 className="text-2xl font-bold text-slate-500 mb-2">Your cart is empty</h2>
             <p className="text-slate-600 mb-8">Looks like you haven't added any meals yet.</p>
-            <Button className="bg-blue-600 hover:bg-blue-500 px-8 py-6 rounded-2xl font-bold">
-              Return to Menu
-            </Button>
+            <Link href={'/meals'}>
+              <Button className="bg-blue-600 hover:bg-blue-500 px-8 py-6 rounded-2xl font-bold">
+                Return to Menu
+              </Button>
+            </Link>
           </div>
         )}
       </div>

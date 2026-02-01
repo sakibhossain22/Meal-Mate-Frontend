@@ -26,7 +26,7 @@ export default function RegisterNow() {
 
                 <div className="mt-8  space-y-3">
                     {['Extra 20% off on your first order', 'Fast & Reliable delivery', 'Exclusive member-only deals'].map((item, i) => (
-                        <div key={i} className="flex items-center justify-center lg:justify-start gap-3 text-slate-700 font-semibold">
+                        <div key={i} className="flex items-center lg:justify-start gap-3 text-slate-700 font-semibold">
                             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#f22e3e] text-white text-[10px]">✔</span>
                             <p className="dark:text-slate-300">{item}</p>
                         </div>

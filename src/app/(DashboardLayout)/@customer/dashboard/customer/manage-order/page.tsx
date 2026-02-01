@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 export default async function ManageOrders() {
     const response = await customerOrder();
@@ -50,8 +51,8 @@ export default async function ManageOrders() {
                                             <div className="flex items-center gap-2">
                                                 <p className="text-sm font-bold text-white">Order #{order.id.slice(0, 8).toUpperCase()}</p>
                                                 <span className={`text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-wider ${order.status === 'PENDING'
-                                                        ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
-                                                        : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
+                                                    ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
+                                                    : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
                                                     }`}>
                                                     {order.status}
                                                 </span>
@@ -116,9 +117,11 @@ export default async function ManageOrders() {
                             </div>
                             <h2 className="text-xl font-bold text-slate-400">No Orders Yet</h2>
                             <p className="text-slate-600 mt-1 max-w-xs mx-auto text-sm">Once you start ordering delicious meals, they will appear here.</p>
-                            <Button className="mt-8 bg-blue-600 hover:bg-blue-500 rounded-2xl px-8 h-12 font-bold">
-                                Explore Menu
-                            </Button>
+                            <Link href={'/meals'}>
+                                <Button className="bg-blue-600 hover:bg-blue-500 px-8 py-6 rounded-2xl font-bold">
+                                    Explore Menu
+                                </Button>
+                            </Link>
                         </div>
                     )}
                 </div>

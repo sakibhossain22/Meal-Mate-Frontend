@@ -15,7 +15,7 @@ export async function getCategory() {
 const API_URL = env.API_URL
 export async function userSessionAction() {
   const session = await userService.getSession()
-  return session
+  return session.data
 }
 
 

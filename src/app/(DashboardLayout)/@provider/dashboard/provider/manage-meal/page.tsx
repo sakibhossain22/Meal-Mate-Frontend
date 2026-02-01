@@ -20,7 +20,7 @@ export default async function ManageMeal() {
       <div className="max-w-6xl mx-auto">
 
         {/* Header Section */}
-        <div className="flex justify-between items-center mb-10">
+        <div className="lg:flex md:flex justify-between items-center mb-10">
           <div>
             <h1 className="text-3xl font-black text-white flex items-center gap-3">
               <Utensils className="text-orange-500" size={32} />
@@ -29,7 +29,7 @@ export default async function ManageMeal() {
             <p className="text-slate-500 mt-1 font-medium">Add, edit, or remove items from your kitchen.</p>
           </div>
           <Link href="/dashboard/provider/add-meal">
-            <Button className="bg-orange-600 hover:bg-orange-500 text-white rounded-2xl h-12 px-6 font-bold flex gap-2">
+            <Button className="bg-orange-600 hover:bg-orange-500 lg:mt-0 md:mt-0 mt-4 text-white rounded-2xl h-12 px-6 font-bold flex gap-2">
               <Plus size={20} /> Add New Meal
             </Button>
           </Link>

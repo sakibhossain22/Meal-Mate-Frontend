@@ -90,7 +90,7 @@ const LoginPage = () => {
           />
           <form.Field
             name="password"
-            children={(field) => (
+            children={(field) =>  (
               <div className="relative w-full">
                 <input
                   name={field.name}

@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-slate-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          
+
           {/* 1. Brand & Description */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2">
@@ -16,7 +16,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-slate-400 leading-relaxed">
-              Savor the flavors of perfection. We deliver fresh, handmade meals 
+              Savor the flavors of perfection. We deliver fresh, handmade meals
               crafted with love and the finest ingredients right to your doorstep.
             </p>
             <div className="flex items-center gap-4">
@@ -32,13 +32,21 @@ export default function Footer() {
           <div>
             <h4 className="text-xl font-bold mb-6 border-b-2 border-[#f22e3e] w-fit">Quick Links</h4>
             <ul className="space-y-4 text-slate-400">
-              {["Home", "All Meals", "About Us", "Contact", "Our Chefs"].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="hover:text-[#f22e3e] hover:pl-2 transition-all duration-300">
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/" className="hover:text-[#f22e3e] hover:pl-2 transition-all duration-300">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/providers" className="hover:text-[#f22e3e] hover:pl-2 transition-all duration-300">
+                  Providers
+                </Link>
+              </li>
+              <li>
+                <Link href="/meals" className="hover:text-[#f22e3e] hover:pl-2 transition-all duration-300">
+                  All Meals
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -66,9 +74,9 @@ export default function Footer() {
             <h4 className="text-xl font-bold mb-6 border-b-2 border-[#f22e3e] w-fit">Newsletter</h4>
             <p className="text-slate-400 mb-6">Subscribe to get the latest offers and menu updates.</p>
             <form className="relative">
-              <input 
-                type="email" 
-                placeholder="Your Email" 
+              <input
+                type="email"
+                placeholder="Your Email"
                 className="w-full bg-slate-800 border border-slate-700 rounded-full py-3 px-6 focus:outline-none focus:border-[#f22e3e] transition-colors"
               />
               <button className="absolute right-1 top-1 h-10 w-10 bg-[#f22e3e] rounded-full flex items-center justify-center hover:bg-[#d82634] transition-colors">

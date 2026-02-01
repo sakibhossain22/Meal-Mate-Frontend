@@ -68,7 +68,7 @@ export default async function CustomerStats() {
                             <h3 className="text-xl font-black text-white flex items-center gap-2 italic">
                                 <Clock className="text-blue-500" /> Recent Orders
                             </h3>
-                            <Link href={'/manage-order'}>
+                            <Link href={'/dashboard/customer/manage-order'}>
                                 <Button variant="link" className="text-blue-400">View All</Button></Link>
                         </div>
 

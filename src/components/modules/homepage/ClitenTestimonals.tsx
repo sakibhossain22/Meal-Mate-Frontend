@@ -4,14 +4,14 @@ import Image from "next/image";
 
 export default async function ClientTestimonials() {
     const res = await getAllReviewHome();
-    const reviews = res?.data || [];
+    const reviews = res?.data?.slice(0,6) || [];
     
     return (
         <section className="py-20">
             <div className="container mx-auto px-4 text-center">
                 <div className="mb-16">
                     <span className="text-[#f22e3e] font-bold uppercase tracking-widest text-sm">Customer Reviews</span>
-                    <h2 className="text-4xl md:text-5xl font-extrabold dark:text-slate-300 text-slate-900 mt-4">
+                    <h2 className="text-3xl md:text-5xl font-extrabold dark:text-slate-300 text-slate-900 mt-4">
                         What Our <span className="text-[#f22e3e]">Clients Say</span>
                     </h2>
                 </div>
