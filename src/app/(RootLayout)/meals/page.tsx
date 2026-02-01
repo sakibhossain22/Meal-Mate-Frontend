@@ -14,10 +14,6 @@ type MealsPageProps = {
 }
 
 export default async function MealsPage({ searchParams }: MealsPageProps) {
-    const category = searchParams?.category || "";
-    const page = Number(searchParams?.page) || 1;
-    console.log(category);
-    const query = `category=Pizza`
 
 
     const { data: categories } = await getCategory();
