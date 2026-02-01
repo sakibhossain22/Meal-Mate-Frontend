@@ -7,7 +7,8 @@ import {
   ArrowRight,
   CreditCard,
   Utensils,
-  ShieldCheck
+  ShieldCheck,
+  LocateIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deleteCartItem } from "@/actions/cart.action";
@@ -91,7 +92,19 @@ export default async function Cart() {
                 </div>
               </div>
 
-              <form action={createOrderAction.bind(null, allItems, total)}>
+              <form id="checkoutForm" action={createOrderAction.bind(null, allItems, total)}>
+                <div className="space-y-2 my-4">
+                  <label form="checkoutForm" className="text-xs font-bold text-slate-400 flex items-center gap-2 uppercase tracking-widest">
+                    <LocateIcon size={14} /> Devlivery Address
+                  </label>
+                  <input
+                    required
+                    type="url"
+                    placeholder="Add Your Image Direct Link"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+
+                  />
+                </div>
                 <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-500 text-white h-14 rounded-2xl font-black text-lg shadow-lg shadow-orange-950/20 group">
                   CHECKOUT NOW
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />

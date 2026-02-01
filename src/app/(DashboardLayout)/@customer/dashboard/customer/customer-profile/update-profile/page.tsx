@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { User, Phone, Save, Loader2 } from "lucide-react";
+import { User, Phone, Save, Loader2, Image } from "lucide-react";
 import { toast } from "sonner";
 import { updateProviderProfile } from "@/actions/profile.action";
 import { redirect } from "next/navigation";
@@ -11,6 +11,7 @@ export default function UpdateProfile() {
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
+        image: ""
     });
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -67,7 +68,19 @@ export default function UpdateProfile() {
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         />
                     </div>
-
+                    <div className="space-y-2">
+                        <label className="text-xs font-bold text-slate-400 flex items-center gap-2 uppercase tracking-widest">
+                            <Image size={14} /> Profile Image
+                        </label>
+                        <input
+                            required
+                            type="url"
+                            placeholder="Add Your Image Direct Link"
+                            className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                            value={formData.image}
+                            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                        />
+                    </div>
                     <button
                         disabled={loading}
                         type="submit"

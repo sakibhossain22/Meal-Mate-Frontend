@@ -33,7 +33,6 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
     }
 
     const handleAddToCart = addToCart.bind(null, data.id, 1)
-    console.log(handleAddToCart);
     return (
         <div className="dark:bg-slate-950 text-slate-200 min-h-screen p-4 md:p-10">
             {/* --- Main Product Section --- */}

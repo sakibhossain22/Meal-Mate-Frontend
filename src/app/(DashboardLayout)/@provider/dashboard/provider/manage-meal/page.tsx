@@ -6,7 +6,6 @@ import {
   Utensils,
   CheckCircle2,
   XCircle,
-  MoreVertical,
   Star
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,6 @@ export default async function ManageMeal() {
     <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200">
       <div className="max-w-6xl mx-auto">
 
-        {/* Header Section */}
         <div className="lg:flex md:flex justify-between items-center mb-10">
           <div>
             <h1 className="text-3xl font-black text-white flex items-center gap-3">
@@ -35,7 +33,6 @@ export default async function ManageMeal() {
           </Link>
         </div>
 
-        {/* Meal List Table */}
         <div className="bg-slate-900/40 border border-slate-800 rounded-[2.5rem] overflow-hidden backdrop-blur-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">

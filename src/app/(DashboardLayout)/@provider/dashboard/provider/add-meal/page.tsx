@@ -80,8 +80,7 @@ export default function AddMeal() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           
-          {/* 1. Image URL & Preview */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div className="">
             <div className="space-y-2">
               <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
                 <Link2 size={16} /> Meal Image URL

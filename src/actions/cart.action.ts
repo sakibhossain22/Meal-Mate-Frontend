@@ -25,11 +25,7 @@ export async function deleteCartItem(id: string) {
 }
 // Addd Cart
 export async function addToCart(mealId: string, quantity: number) {
-
-    const session = await userService.getSession()
-
     const cookieStore = await cookies();
-
     const res = await fetch(`${API_URL}/cart`, {
         method: "POST",
         headers: {
@@ -38,8 +34,6 @@ export async function addToCart(mealId: string, quantity: number) {
         },
         body: JSON.stringify({ mealId, quantity }),
     });
-
     const data = await res.json();
-    console.log(data);
     return data;
 }

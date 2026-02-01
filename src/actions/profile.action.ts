@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 const API_URL = env.API_URL || "http://localhost:5000"
 
 
-export async function updateProviderProfile(formData: { name: string, phone: string }) {
+export async function updateProviderProfile(formData: { name: string, phone: string, image: string }) {
     const cookieStore = await cookies();
 
     try {
