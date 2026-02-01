@@ -4,20 +4,33 @@ import React, { useEffect, useState } from 'react';
 import { UtensilsCrossed, DollarSign, AlignLeft, Tag, CheckCircle2, Edit3, Loader2, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useParams, useRouter } from 'next/navigation';
-import { getSingleMeal, updateMeal } from '@/actions/meal.action';
+import { getCategory, getSingleMeal, updateMeal } from '@/actions/meal.action';
 
 export default function EditMeal() {
   const { id } = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
+  const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const data = await getCategory()
+        setCategories(data.data);
+      } catch (error) {
+        console.error("Failed to fetch:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: "",
     categoryId: "",
-    image: "", 
+    image: "",
     isAvailable: true
   });
 
@@ -32,7 +45,7 @@ export default function EditMeal() {
             description: meal.description,
             price: meal.price.toString(),
             categoryId: meal.categoryId,
-            image: meal.image || "", 
+            image: meal.image || "",
             isAvailable: meal.isAvailable
           });
         }
@@ -95,23 +108,18 @@ export default function EditMeal() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Meal Name */}
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
               <UtensilsCrossed size={16} /> Meal Name
             </label>
             <input required type="text" className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-14 px-6 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
-
-          {/* Image URL Field */}
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
               <ImageIcon size={16} /> Image URL
             </label>
             <input type="text" placeholder="https://example.com/image.jpg" className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-14 px-6 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all" value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} />
           </div>
-
-          {/* Description */}
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
               <AlignLeft size={16} /> Description
@@ -131,15 +139,15 @@ export default function EditMeal() {
                 <Tag size={16} /> Category
               </label>
               <select className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-14 px-6 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all appearance-none" value={formData.categoryId} onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}>
-                <option value="Pizza">Pizza</option>
-                <option value="Burger">Burger</option>
-                <option value="Pasta">Pasta</option>
-                <option value="Drinks">Drinks</option>
+                {
+                  categories?.map((category: { id: string, name: string }) => (
+                    <option key={category.id} value={category.id}>{category.name}</option>
+                  ))
+                }
               </select>
             </div>
           </div>
 
-          {/* Availability Switch */}
           <div className="flex items-center justify-between p-6 bg-slate-950/50 rounded-2xl border border-slate-800">
             <div className="flex items-center gap-3">
               <CheckCircle2 className={formData.isAvailable ? "text-emerald-500" : "text-slate-600"} />

@@ -67,40 +67,25 @@ export default function SignupPage() {
           onSubmit={(e) => {
             e.preventDefault()
             e.stopPropagation()
-            form.handleSubmit() // এটি লজিক ট্রিগার করবে
+            form.handleSubmit()
           }}
           className="space-y-5"
         >
           <FieldGroup className="space-y-4">
-            {/* Name */}
             <form.Field name="name">
               {(field) => (
                 <div className="relative w-full">
-                  <input
-                    placeholder="Full Name"
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm"
-                  />
+                  <input placeholder="Full Name" value={field.state.value} onBlur={field.handleBlur} onChange={(e) => field.handleChange(e.target.value)} className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm"/>
                   <User className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/70" />
                   {field.state.meta.errors && <em className="text-[10px] text-red-400 ml-4">{field.state.meta.errors.join(', ')}</em>}
                 </div>
               )}
             </form.Field>
 
-            {/* Email */}
             <form.Field name="email">
               {(field) => (
                 <div className="relative w-full">
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm"
-                  />
+                  <input type="email" placeholder="Email Address" value={field.state.value} onBlur={field.handleBlur} onChange={(e) => field.handleChange(e.target.value)} className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm"/>
                   <Mail className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/70" />
                   {field.state.meta.errors && <em className="text-[10px] text-red-400 ml-4">{field.state.meta.errors.join(', ')}</em>}
                 </div>
@@ -108,41 +93,25 @@ export default function SignupPage() {
             </form.Field>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Phone */}
               <form.Field name="phone">
                 {(field) => (
                   <div className="relative w-full">
-                    <input
-                      placeholder="Phone Number"
-                      value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm"
-                    />
+                    <input placeholder="Phone Number" value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm"/>
                     <Phone className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/70" />
                     {field.state.meta.errors && <em className="text-[10px] text-red-400 ml-4">{field.state.meta.errors.join(', ')}</em>}
                   </div>
                 )}
               </form.Field>
-
-              {/* Password */}
               <form.Field name="password">
                 {(field) => (
                   <div className="relative w-full">
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm"
-                    />
+                    <input type="password" placeholder="Password" value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} className="w-full h-11 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all text-sm" />
                     <Lock className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/70" />
                     {field.state.meta.errors && <em className="text-[10px] text-red-400 ml-4">{field.state.meta.errors.join(', ')}</em>}
                   </div>
                 )}
               </form.Field>
             </div>
-
-            {/* Role */}
             <form.Field name="role">
               {(field) => (
                 <Select value={field.state.value} onValueChange={(value: any) => field.handleChange(value)}>
@@ -171,8 +140,6 @@ export default function SignupPage() {
             )}
           />
         </form>
-
-        {/* Google & Login Link... */}
       </div>
     </div>
   )

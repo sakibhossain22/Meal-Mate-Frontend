@@ -1,15 +1,5 @@
 import { getCart } from "@/actions/meal.action";
-import {
-  ShoppingBasket,
-  Trash2,
-  Plus,
-  Minus,
-  ArrowRight,
-  CreditCard,
-  Utensils,
-  ShieldCheck,
-  LocateIcon
-} from "lucide-react";
+import {ShoppingBasket,Trash2,Plus,Minus,ArrowRight,CreditCard,Utensils, ShieldCheck,LocateIcon} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { deleteCartItem } from "@/actions/cart.action";
 import { createOrderAction } from "@/actions/order.action";

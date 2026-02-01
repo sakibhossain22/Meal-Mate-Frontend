@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
 const API_URL = env.API_URL
+
 export async function updateUserStatus(userId: string, status: { status: string }) {
     const cookieStore = await cookies()
     var statusData;

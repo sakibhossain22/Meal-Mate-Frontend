@@ -37,7 +37,7 @@ export default function UpdateProfile() {
 
                 <div className="mb-8">
                     <h1 className="text-2xl font-black text-white">Update Profile</h1>
-                    <p className="text-slate-500 text-sm mt-1">Change your name and contact phone.</p>
+                    <p className="text-slate-500 text-sm mt-1">Change your name and contact phone and image.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -62,7 +62,7 @@ export default function UpdateProfile() {
                         <input
                             required
                             type="tel"
-                            placeholder="017XXXXXXXX"
+                            placeholder="01XXXXXXXX"
                             className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}

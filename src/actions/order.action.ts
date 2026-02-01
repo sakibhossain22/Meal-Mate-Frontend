@@ -66,7 +66,6 @@ export async function createOrderAction(cartItems: any[], totalPrice: number, fo
     return { success: false, message: "Please login to place an order." };
   }
 
-
   const res = await fetch(`${API_URL}/orders`, {
     method: "POST",
     headers: {

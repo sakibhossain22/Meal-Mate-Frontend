@@ -1,10 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import {
-  BellRing, User, Clock, ShoppingBag,
-  Loader2, Mail, RefreshCcw
-} from "lucide-react";
+import { BellRing, User, Clock, ShoppingBag, Loader2, Mail, RefreshCcw} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { incomingOrder, updateOrderStatus } from "@/actions/order.action";
@@ -14,7 +11,6 @@ export default function IncomingOrders() {
   const [fetching, setFetching] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   console.log(orders);
-  // 1. Initial Data Load
   const loadOrders = async () => {
     try {
       const response = await incomingOrder();
@@ -25,32 +21,26 @@ export default function IncomingOrders() {
       setFetching(false);
     }
   };
-
   useEffect(() => {
     loadOrders();
   }, []);
 
-  // 2. Status Update Handler
   const handleUpdateStatus = async (e: React.FormEvent<HTMLFormElement>, orderItemId: string) => {
     e.preventDefault();
     console.log(orderItemId);
 
-    // FormData dhorar sothik niyom
     const form = e.currentTarget;
     const formData = new FormData(form);
     const newStatus = formData.get("status") as string;
     console.log(newStatus);
-    // Loading start
     setUpdatingId(orderItemId);
 
     try {
-      // Backend expects: (id: string, formData: FormData)
-      // ID obosshoi 'item.id' hote hobe (OrderItem ID), item.order.id noy.
       const result = await updateOrderStatus(orderItemId, newStatus);
 
       if (result?.success || !result?.error) {
         toast.success(`Order status updated to ${newStatus}`);
-        await loadOrders(); // List refresh koro
+        await loadOrders();
       } else {
         toast.error("Update failed");
       }
@@ -73,8 +63,6 @@ export default function IncomingOrders() {
   return (
     <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200">
       <div className="max-w-6xl mx-auto">
-
-        {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
           <div>
             <h1 className="text-4xl font-black text-white flex items-center gap-3">
@@ -87,17 +75,12 @@ export default function IncomingOrders() {
             <p className="text-xl font-black text-white text-center">{orders.length}</p>
           </div>
         </div>
-
-        {/* Orders Grid */}
         <div className="grid gap-6">
           {orders.length > 0 ? (
             orders.map((item: any) => (
               <div key={item.id} className="bg-slate-900/40 border border-slate-800 rounded-[2.5rem] overflow-hidden backdrop-blur-sm hover:border-slate-700 transition-all">
 
-                {/* FORM STARTS HERE */}
                 <form onSubmit={(e) => handleUpdateStatus(e, item?.order.id)} className="grid grid-cols-1 lg:grid-cols-3">
-
-                  {/* 1. Meal & Order Info */}
                   <div className="p-8 border-b lg:border-b-0 lg:border-r border-slate-800">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center overflow-hidden">
@@ -119,8 +102,6 @@ export default function IncomingOrders() {
                       </p>
                     </div>
                   </div>
-
-                  {/* 2. Customer Details */}
                   <div className="p-8 border-b lg:border-b-0 lg:border-r border-slate-800 bg-slate-900/20">
                     <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-4">Customer Info</p>
                     <div className="space-y-4">
@@ -140,8 +121,6 @@ export default function IncomingOrders() {
                       </div>
                     </div>
                   </div>
-
-                  {/* 3. Status Update Area */}
                   <div className="p-8 flex flex-col justify-center gap-6">
                     <div>
                       <label className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-2 block">
@@ -160,10 +139,7 @@ export default function IncomingOrders() {
                       </select>
                     </div>
 
-                    <Button
-                      disabled={updatingId === item?.order.id}
-                      type="submit"
-                      className="w-full bg-orange-600 hover:bg-orange-500 text-white rounded-xl h-12 font-black transition-all"
+                    <Button disabled={updatingId === item?.order.id} type="submit" className="w-full bg-orange-600 hover:bg-orange-500 text-white rounded-xl h-12 font-black transition-all"
                     >
                       {updatingId === item?.order.id ? (
                         <span className="flex items-center gap-2">

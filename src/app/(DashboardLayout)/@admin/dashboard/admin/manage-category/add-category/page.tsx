@@ -7,12 +7,9 @@ export default async function AddCategory() {
     return (
         <div className="bg-slate-950 min-h-screen p-6 md:p-12 text-slate-200">
             <div className="max-w-3xl mx-auto">
-
-                {/* Back Button & Header */}
                 <Link
                     href="/dashboard/admin/categories"
-                    className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors mb-6 group"
-                >
+                    className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors mb-6 group">
                     <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
                     <span className="text-sm font-bold uppercase tracking-widest">Back to List</span>
                 </Link>
@@ -36,28 +33,7 @@ export default async function AddCategory() {
                             </label>
                             <div className="relative group">
                                 <PlusCircle className="absolute left-4 top-4 text-slate-600 group-focus-within:text-blue-500 transition-colors" size={20} />
-                                <input
-                                    name="name"
-                                    type="text"
-                                    placeholder="e.g. Italian Delights"
-                                    className="w-full bg-slate-950/50 border border-slate-800 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all text-white font-medium"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            <label className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
-                                Description (Optional)
-                            </label>
-                            <div className="relative group">
-                                <TextQuote className="absolute left-4 top-4 text-slate-600 group-focus-within:text-blue-500 transition-colors" size={20} />
-                                <textarea
-                                    name="description"
-                                    rows={4}
-                                    placeholder="Describe what kind of meals belong here..."
-                                    className="w-full bg-slate-950/50 border border-slate-800 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all text-white font-medium resize-none"
-                                />
+                                <input name="name" type="text" placeholder="e.g. Italian Delights" className="w-full bg-slate-950/50 border border-slate-800 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 transition-all text-white font-medium" required />
                             </div>
                         </div>
 
@@ -69,8 +45,6 @@ export default async function AddCategory() {
                         </Button>
                     </form>
                 </div>
-
-                {/* Info Note */}
                 <p className="mt-8 text-center text-slate-600 text-xs font-bold uppercase tracking-widest leading-loose">
                     Categories help users filter meals <br /> and find what they crave faster.
                 </p>

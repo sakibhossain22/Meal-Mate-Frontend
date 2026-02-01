@@ -35,22 +35,13 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
     const handleAddToCart = addToCart.bind(null, data.id, 1)
     return (
         <div className="dark:bg-slate-950 text-slate-200 min-h-screen p-4 md:p-10">
-            {/* --- Main Product Section --- */}
-            <div className="max-w-6xl mx-auto my-12 p-6 md:p-10 dark:bg-slate-900 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-800 flex flex-col md:flex-row gap-12 items-center">
+            =            <div className="max-w-6xl mx-auto my-12 p-6 md:p-10 dark:bg-slate-900 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-800 flex flex-col md:flex-row gap-12 items-center">
 
-                {/* Left: Image Container */}
                 <div className="relative group w-full md:w-1/2 flex justify-center">
                     <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-rose-500/20 rounded-full blur-3xl opacity-60 scale-90 group-hover:scale-105 transition-transform duration-500"></div>
-                    <Image
-                        alt={data.name}
-                        width={500}
-                        height={500}
-                        src={data.image || "/pizza.png"}
-                        className="relative z-10 object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] group-hover:rotate-6 transition-transform duration-500"
-                    />
+                    <Image alt={data.name} width={500} height={500} src={data.image || "/pizza.png"} className="relative z-10 object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] group-hover:rotate-6 transition-transform duration-500" />
                 </div>
 
-                {/* Right: Info Container */}
                 <div className="w-full md:w-1/2 space-y-6">
                     <div>
                         <span className="px-4 py-1.5 bg-orange-500/10 text-orange-500 text-xs font-bold uppercase tracking-widest rounded-full border border-orange-500/20">
@@ -84,14 +75,7 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
 
                     <div className="pt-4">
                         <form action={handleAddToCart}>
-                            <Button type="submit" className="
-                       inline-flex w-full items-center justify-center gap-2
-                      rounded-full bg-[#fbb200] px-4 py-6
-                      font-semibold text-black
-                      transition-all duration-300
-                      hover:bg-[#f22e3e] hover:text-white hover:shadow-lg
-                      dark:bg-[#f22e3e] dark:text-white dark:hover:bg-[#ff5a67]
-                    ">
+                            <Button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#fbb200] px-4 py-6 font-semibold text-black transition-all duration-300 hover:bg-[#f22e3e] hover:text-white hover:shadow-lg dark:bg-[#f22e3e] dark:text-white dark:hover:bg-[#ff5a67]">
                                 <ShoppingCart size={22} />
                                 ADD TO CART
                             </Button>
@@ -100,47 +84,34 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                 </div>
             </div>
 
-            {/* --- Tabs & Reviews Section --- */}
             <div className="w-full max-w-5xl mx-auto px-4">
                 <Tabs defaultValue="review" className="w-full my-16">
                     <div className="flex justify-center mb-8">
                         <TabsList className="dark:bg-slate-900 p-1 rounded-xl h-auto border border-slate-800 shadow-inner">
-                            <TabsTrigger
-                                className="w-40 md:w-60 py-3 text-lg font-semibold rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-orange-400 data-[state=active]:shadow-lg transition-all text-slate-400"
-                                value="description"
-                            >
+                            <TabsTrigger className="w-40 md:w-60 py-3 text-lg font-semibold rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-orange-400 data-[state=active]:shadow-lg transition-all text-slate-400"
+                                value="description">
                                 Description
                             </TabsTrigger>
-                            <TabsTrigger
-                                className="w-40 md:w-60 py-3 text-lg font-semibold rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-orange-400 data-[state=active]:shadow-lg transition-all text-slate-400"
-                                value="review"
-                            >
-                                Reviews ({data?.reviews?.length || 0})
+                            <TabsTrigger className="w-40 md:w-60 py-3 text-lg font-semibold rounded-lg data-[state=active]:bg-slate-800 data-[state=active]:text-orange-400 data-[state=active]:shadow-lg transition-all text-slate-400"
+                                value="review" >Reviews ({data?.reviews?.length || 0})
                             </TabsTrigger>
                         </TabsList>
                     </div>
 
-                    {/* Description Content */}
                     <TabsContent value="description" className="focus-visible:outline-none">
                         <div className="dark:bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl min-h-[200px] leading-relaxed text-slate-400">
                             <h3 className="text-2xl font-bold text-black dark:text-white mb-4">Product Details</h3>
                             <p className="text-black dark:text-slate-200">{data?.description}</p>
                         </div>
                     </TabsContent>
-
-                    {/* Review Content */}
                     <TabsContent value="review" className="focus-visible:outline-none">
-                        {/* New Review Form */}
                         <ReviewForm mealId={data.id} userId={session.data.user.id} key={data.id} />
-
-                        {/* Existing Reviews List */}
                         <div className="grid gap-4">
                             {data?.reviews?.length > 0 ? (
                                 data.reviews.map((review: ReviewType) => (
                                     <div
                                         key={review.id}
-                                        className="flex flex-col md:flex-row md:items-start gap-5 dark:bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all shadow-sm"
-                                    >
+                                        className="flex flex-col md:flex-row md:items-start gap-5 dark:bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all shadow-sm">
                                         <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-rose-600 flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
                                             {review.customer.name.charAt(0).toUpperCase()}
                                         </div>

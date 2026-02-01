@@ -1,14 +1,5 @@
 import { deleteReview, getAllReview } from "@/actions/admin.action"; // Tumar path onujayi koro
-import {
-    Star,
-    MessageSquare,
-    User,
-    Calendar,
-    Quote,
-    Trash2Icon,
-    Trash,
-    Trash2
-} from "lucide-react";
+import {Star,MessageSquare,User, Calendar,Quote,Trash2} from "lucide-react";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 
@@ -19,8 +10,6 @@ export default async function CustomerReviews() {
     return (
         <div className="bg-slate-950 min-h-screen p-6 md:p-12 text-slate-200">
             <div className="max-w-7xl mx-auto">
-
-                {/* Header Section */}
                 <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
                         <div className="flex items-center gap-2 mb-2">
@@ -35,8 +24,6 @@ export default async function CustomerReviews() {
                         Discover what our food lovers are saying about their dining experience and our service.
                     </p>
                 </header>
-
-                {/* Reviews Grid */}
                 {reviews.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {reviews.map((review: any) => (
@@ -45,8 +32,6 @@ export default async function CustomerReviews() {
                                 className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2rem] backdrop-blur-xl relative group hover:border-orange-500/30 transition-all duration-500 hover:-translate-y-2"
                             >
                                 <Quote className="absolute top-6 right-8 text-slate-800 group-hover:text-orange-500/10 transition-colors" size={48} />
-
-                                {/* Star Rating */}
                                 <div className="flex gap-1 mb-6">
                                     {[...Array(5)].map((_, i) => (
                                         <Star
@@ -56,13 +41,9 @@ export default async function CustomerReviews() {
                                         />
                                     ))}
                                 </div>
-
-                                {/* Review Content */}
                                 <p className="text-slate-300 leading-relaxed font-medium mb-8 relative z-10">
                                     "{review.comment}"
                                 </p>
-
-                                {/* User Info Footer */}
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4 pt-6 border-t border-slate-800/50">
                                         <div className="h-12 w-12 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-400 ring-1 ring-slate-700 shadow-inner">
@@ -88,7 +69,6 @@ export default async function CustomerReviews() {
                         ))}
                     </div>
                 ) : (
-                    /* Empty State */
                     <div className="text-center py-20 bg-slate-900/20 border-2 border-dashed border-slate-800 rounded-[3rem]">
                         <div className="h-20 w-20 bg-slate-900 rounded-3xl flex items-center justify-center mx-auto mb-6 text-slate-700">
                             <MessageSquare size={40} />

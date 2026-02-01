@@ -1,13 +1,5 @@
 import { adminAllCategory } from "@/actions/meal.action";
-import {
-    Layers,
-    ChevronRight,
-    UtensilsCrossed,
-    Plus,
-    MoreHorizontal,
-    Package,
-    Calendar
-} from "lucide-react";
+import { Layers, UtensilsCrossed, Plus, Package, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +11,7 @@ export default async function ManageCategory() {
     return (
         <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200 font-sans">
             <div className="max-w-7xl mx-auto">
-                {/* Header Section */}
+
                 <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
                     <div>
                         <div className="flex items-center gap-2 text-orange-500 font-bold text-sm mb-2">
@@ -37,12 +29,10 @@ export default async function ManageCategory() {
                     </Link>
                 </header>
 
-                {/* Categories Grid */}
                 <div className="grid grid-cols-1 gap-10">
                     {categories.map((category: any) => (
                         <div key={category.id} className="bg-slate-900/40 border border-slate-800 rounded-[2.5rem] overflow-hidden backdrop-blur-sm">
 
-                            {/* Category Banner/Header */}
                             <div className="p-6 md:p-8 border-b border-slate-800 bg-slate-900/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
                                 <div className="flex items-center gap-4">
                                     <div className="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center text-orange-500 border border-orange-500/20">
@@ -56,7 +46,6 @@ export default async function ManageCategory() {
 
                             </div>
 
-                            {/* Meals List inside Category */}
                             <div className="p-6">
                                 {category.meals.length > 0 ? (
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -70,11 +59,8 @@ export default async function ManageCategory() {
 
                                                 <div className="flex items-start gap-4">
                                                     <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden">
-                                                        {meal.image ? (
-                                                            <Image src={meal.image} alt={meal.name} width={64} height={64} className="object-cover" />
-                                                        ) : (
-                                                            <UtensilsCrossed className="text-slate-700" size={24} />
-                                                        )}
+                                                        {meal.image ? <Image src={meal.image} alt={meal.name} width={64} height={64} className="object-cover" /> : <UtensilsCrossed className="text-slate-700" size={24} />
+                                                        }
                                                     </div>
                                                     <div className="flex-1">
                                                         <h4 className="font-bold text-slate-100 group-hover:text-orange-400 transition-colors">{meal.name}</h4>

@@ -1,13 +1,8 @@
 "use client"
 
-import {
-    Pagination, PaginationContent, PaginationItem,
-    PaginationLink, PaginationNext, PaginationPrevious,
-} from "@/components/ui/pagination"
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 import { useRouter, useSearchParams } from "next/navigation"
-import {
-    Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -69,7 +64,7 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
         const params = new URLSearchParams(searchParams.toString())
         if (category && category !== "all") params.set("category", category)
         else params.delete("category")
-        
+
         params.set("page", page.toString())
         params.set("orderby", sort)
         router.push(`/meals?${params.toString()}`, { scroll: false })
@@ -134,12 +129,7 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
                         {meals?.length > 0 ? meals.map((meal: any) => (
                             <div key={meal.id} className="group overflow-hidden rounded-2xl border transition bg-gray-200 hover:shadow-xl dark:bg-slate-900">
                                 <div className="relative h-64 w-full overflow-hidden">
-                                    <Image
-                                        src={meal.image || "/pizza.png"}
-                                        alt={meal.name}
-                                        fill
-                                        className="object-contain p-4 transition-transform duration-500 group-hover:rotate-45"
-                                    />
+                                    <Image src={meal.image || "/pizza.png"} alt={meal.name} fill className="object-contain p-4 transition-transform duration-500 group-hover:rotate-45" />
                                 </div>
                                 <div className="p-4">
                                     <div className="flex items-center justify-between">

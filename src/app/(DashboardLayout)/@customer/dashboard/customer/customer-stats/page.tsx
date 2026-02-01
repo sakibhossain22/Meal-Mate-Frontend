@@ -1,14 +1,5 @@
 import { customerStats } from "@/actions/customer.action";
-import {
-    ShoppingBag,
-    Wallet,
-    Utensils,
-    Star,
-    Clock,
-    ChevronRight,
-    ArrowUpRight,
-    MessageSquare
-} from "lucide-react";
+import { ShoppingBag, Wallet, Utensils, Star, Clock, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -45,8 +36,6 @@ export default async function CustomerStats() {
     return (
         <div className="bg-slate-950 min-h-screen p-4 md:p-8 text-slate-200">
             <div className="max-w-7xl mx-auto space-y-10">
-
-                {/* Top Summary Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {summaryCards.map((card, i) => (
                         <div key={i} className={`relative overflow-hidden bg-slate-900/50 border ${card.border} p-8 rounded-[2.5rem] backdrop-blur-md group hover:bg-slate-900 transition-all`}>
@@ -61,8 +50,6 @@ export default async function CustomerStats() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-                    {/* Recent Orders Section */}
                     <section className="space-y-6">
                         <div className="flex items-center justify-between px-2">
                             <h3 className="text-xl font-black text-white flex items-center gap-2 italic">
@@ -102,8 +89,6 @@ export default async function CustomerStats() {
                             ))}
                         </div>
                     </section>
-
-                    {/* Feedback/Reviews Section */}
                     <section className="space-y-6">
                         <div className="flex items-center justify-between px-2">
                             <h3 className="text-xl font-black text-white flex items-center gap-2 italic">

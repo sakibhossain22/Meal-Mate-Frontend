@@ -1,14 +1,5 @@
 import { providerStats } from "@/actions/order.action";
-import {
-    TrendingUp,
-    ShoppingBag,
-    Users,
-    Star,
-    Utensils,
-    DollarSign,
-    PackageCheck,
-    PackageX
-} from "lucide-react";
+import { TrendingUp, ShoppingBag, Users, Star, Utensils, DollarSign, PackageCheck, PackageX } from "lucide-react";
 
 export default async function ProviderStats() {
     const response = await providerStats();
@@ -51,7 +42,6 @@ export default async function ProviderStats() {
         <div className="bg-slate-950 min-h-screen p-6 md:p-10 text-slate-200">
             <div className="max-w-6xl mx-auto">
 
-                {/* Header */}
                 <div className="mb-10">
                     <h1 className="text-3xl font-black text-white flex items-center gap-3">
                         <TrendingUp className="text-blue-500" size={32} />
@@ -60,7 +50,6 @@ export default async function ProviderStats() {
                     <p className="text-slate-500 mt-2 font-medium">Monitoring your kitchen's performance and growth.</p>
                 </div>
 
-                {/* Main Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                     {statCards.map((card, index) => (
                         <div key={index} className="bg-slate-900/40 border border-slate-800 p-6 rounded-[2rem] backdrop-blur-sm hover:border-slate-700 transition-all">
@@ -74,10 +63,7 @@ export default async function ProviderStats() {
                     ))}
                 </div>
 
-                {/* Detailed Breakdown Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-                    {/* Meal Availability Card */}
                     <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem]">
                         <h3 className="text-lg font-bold text-white mb-6">Inventory Status</h3>
                         <div className="space-y-6">
@@ -98,7 +84,6 @@ export default async function ProviderStats() {
                         </div>
                     </div>
 
-                    {/* Customer Insights Card */}
                     <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] flex flex-col justify-center items-center text-center">
                         <div className="w-20 h-20 bg-blue-500/10 rounded-full flex items-center justify-center mb-4 border border-blue-500/20">
                             <Users size={40} className="text-blue-500" />

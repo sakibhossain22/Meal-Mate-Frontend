@@ -1,14 +1,5 @@
 import { customerOrder } from "@/actions/customer.action";
-import {
-    Package,
-    Clock,
-    CheckCircle2,
-    ChevronRight,
-    Receipt,
-    Utensils,
-    Calendar,
-    ArrowUpRight
-} from "lucide-react";
+import { Package, Receipt, Utensils, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -21,7 +12,6 @@ export default async function ManageOrders() {
         <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200">
             <div className="max-w-5xl mx-auto">
 
-                {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
                     <div>
                         <h1 className="text-4xl font-black text-white flex items-center gap-3">
@@ -34,14 +24,10 @@ export default async function ManageOrders() {
                         Total {orders.length} Orders
                     </Badge>
                 </div>
-
-                {/* Orders List */}
                 <div className="grid gap-8">
-                    {orders.length > 0 ? (
+                    {orders.length > 0 ?
                         orders.map((order: any) => (
                             <div key={order.id} className="group relative bg-slate-900/40 border border-slate-800 rounded-[2.5rem] overflow-hidden transition-all hover:border-slate-700 hover:bg-slate-900/60">
-
-                                {/* Top Bar: Status & ID */}
                                 <div className="p-6 md:p-8 border-b border-slate-800/50 flex flex-wrap items-center justify-between gap-4">
                                     <div className="flex items-center gap-4">
                                         <div className="w-12 h-12 rounded-2xl bg-slate-950 flex items-center justify-center border border-slate-800 text-blue-400 group-hover:scale-110 transition-transform">
@@ -69,18 +55,14 @@ export default async function ManageOrders() {
                                     </div>
                                 </div>
 
-                                {/* Items Area */}
                                 <div className="p-6 md:p-8 grid md:grid-cols-2 gap-6">
                                     <div className="space-y-4">
                                         <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-4">Meal Details</p>
                                         {order.items.map((item: any) => (
                                             <div key={item.id} className="flex items-center gap-4 bg-slate-950/50 p-3 rounded-2xl border border-slate-800/50">
                                                 <div className="w-14 h-14 bg-slate-800 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border border-slate-700">
-                                                    {item.meal.image ? (
-                                                        <img src={item.meal.image} alt={item.meal.name} className="w-full h-full object-cover" />
-                                                    ) : (
-                                                        <Utensils size={20} className="text-slate-600" />
-                                                    )}
+                                                    {item.meal.image ? <img src={item.meal.image} alt={item.meal.name} className="w-full h-full object-cover" /> : <Utensils size={20} className="text-slate-600" />
+                                                    }
                                                 </div>
                                                 <div className="flex-1">
                                                     <h4 className="text-sm font-bold text-slate-200">{item.meal.name}</h4>
@@ -93,7 +75,6 @@ export default async function ManageOrders() {
                                         ))}
                                     </div>
 
-                                    {/* Action & Timeline Placeholder */}
                                     <div className="flex flex-col justify-between p-6 bg-slate-950/30 rounded-3xl border border-slate-800/50">
                                         <div className="space-y-4">
                                             <div className="flex items-center gap-3 text-sm">
@@ -109,9 +90,7 @@ export default async function ManageOrders() {
                                     </div>
                                 </div>
                             </div>
-                        ))
-                    ) : (
-                        <div className="text-center py-32 bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-800">
+                        )) : <div className="text-center py-32 bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-800">
                             <div className="w-20 h-20 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-6 border border-slate-800">
                                 <Package size={40} className="text-slate-700" />
                             </div>
@@ -123,7 +102,7 @@ export default async function ManageOrders() {
                                 </Button>
                             </Link>
                         </div>
-                    )}
+                    }
                 </div>
             </div>
         </div>

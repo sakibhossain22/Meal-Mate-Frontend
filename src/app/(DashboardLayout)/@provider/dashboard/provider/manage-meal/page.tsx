@@ -1,13 +1,5 @@
 import { deleteMealProvider, providerMeal } from "@/actions/meal.action";
-import {
-  Edit,
-  Trash2,
-  Plus,
-  Utensils,
-  CheckCircle2,
-  XCircle,
-  Star
-} from "lucide-react";
+import { Edit, Trash2, Plus, Utensils, CheckCircle2, XCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -49,15 +41,11 @@ export default async function ManageMeal() {
               <tbody className="divide-y divide-slate-800/50">
                 {meals.length > 0 ? meals.map((meal: any) => (
                   <tr key={meal.id} className="group hover:bg-slate-800/30 transition-colors">
-                    {/* Meal Name & Image */}
                     <td className="p-6">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-slate-800 rounded-xl border border-slate-700 overflow-hidden flex-shrink-0 flex items-center justify-center">
-                          {meal.image ? (
-                            <img src={meal.image} alt={meal.name} className="w-full h-full object-cover" />
-                          ) : (
-                            <Utensils size={20} className="text-slate-600" />
-                          )}
+                          {meal.image ? <img src={meal.image} alt={meal.name} className="w-full h-full object-cover" /> : <Utensils size={20} className="text-slate-600" />
+                          }
                         </div>
                         <div>
                           <p className="font-bold text-white group-hover:text-orange-400 transition-colors">{meal.name}</p>
@@ -65,33 +53,24 @@ export default async function ManageMeal() {
                         </div>
                       </div>
                     </td>
-
-                    {/* Category */}
                     <td className="p-6">
                       <span className="text-xs font-bold bg-slate-800 px-3 py-1 rounded-full text-slate-400">
                         {meal.categoryId}
                       </span>
                     </td>
 
-                    {/* Price */}
                     <td className="p-6 font-black text-white">
                       ${meal.price}
                     </td>
 
-                    {/* Status Toggle */}
                     <td className="p-6">
-                      {meal.isAvailable ? (
-                        <div className="flex items-center gap-1.5 text-emerald-500 text-xs font-bold">
-                          <CheckCircle2 size={14} /> Available
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-1.5 text-slate-500 text-xs font-bold">
-                          <XCircle size={14} /> Hidden
-                        </div>
-                      )}
+                      {meal.isAvailable ? <div className="flex items-center gap-1.5 text-emerald-500 text-xs font-bold">
+                        <CheckCircle2 size={14} /> Available
+                      </div> : <div className="flex items-center gap-1.5 text-slate-500 text-xs font-bold">
+                        <XCircle size={14} /> Hidden
+                      </div>
+                      }
                     </td>
-
-                    {/* Rating Calculation */}
                     <td className="p-6">
                       <div className="flex items-center gap-1 text-amber-500">
                         <Star size={14} fill="currentColor" />
@@ -99,28 +78,16 @@ export default async function ManageMeal() {
                       </div>
                     </td>
 
-                    {/* Actions */}
                     <td className="p-6 text-right">
                       <div className="flex justify-end gap-2">
-                        {/* Edit Button: ID onujayi edit page-e niye jabe */}
                         <Link href={`/dashboard/provider/manage-meal/edit-meal/${meal.id}`}>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-9 w-9 rounded-xl hover:bg-blue-500/10 hover:text-blue-500"
-                          >
+                          <Button variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-blue-500/10 hover:text-blue-500">
                             <Edit size={18} />
                           </Button>
                         </Link>
 
-                        {/* Delete Form: Server Action bind kora hoyeche */}
                         <form action={deleteMealProvider.bind(null, meal.id)}>
-                          <Button
-                            type="submit"
-                            variant="ghost"
-                            size="icon"
-                            className="h-9 w-9 rounded-xl hover:bg-rose-500/10 hover:text-rose-500"
-                          >
+                          <Button type="submit"variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-rose-500/10 hover:text-rose-500" >
                             <Trash2 size={18} />
                           </Button>
                         </form>

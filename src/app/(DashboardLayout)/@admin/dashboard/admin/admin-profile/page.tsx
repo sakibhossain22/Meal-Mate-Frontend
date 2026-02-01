@@ -1,16 +1,6 @@
 import { profile } from "@/actions/customer.action";
 import {
-    User,
-    Mail,
-    Calendar,
-    ShieldCheck,
-    ShieldAlert,
-    Settings,
-    Clock,
-    Camera,
-    CreditCard,
-    ShoppingBag,
-    PhoneCallIcon
+    User, Mail, ShieldCheck, ShieldAlert, Settings, Clock, Camera, CreditCard, ShoppingBag, PhoneCallIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

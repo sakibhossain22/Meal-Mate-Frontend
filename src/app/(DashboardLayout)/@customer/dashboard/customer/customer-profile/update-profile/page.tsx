@@ -45,11 +45,7 @@ export default function UpdateProfile() {
                         <label className="text-xs font-bold text-slate-400 flex items-center gap-2 uppercase tracking-widest">
                             <User size={14} /> Full Name
                         </label>
-                        <input
-                            required
-                            type="text"
-                            placeholder="e.g. Shakib Hossain"
-                            className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                        <input required type="text" placeholder="Type Your Name...." className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
@@ -59,27 +55,13 @@ export default function UpdateProfile() {
                         <label className="text-xs font-bold text-slate-400 flex items-center gap-2 uppercase tracking-widest">
                             <Phone size={14} /> Phone Number
                         </label>
-                        <input
-                            required
-                            type="tel"
-                            placeholder="017XXXXXXXX"
-                            className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        />
+                        <input required type="tel" placeholder="Type Your Pjone Number...." className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
                     </div>
                     <div className="space-y-2">
                         <label className="text-xs font-bold text-slate-400 flex items-center gap-2 uppercase tracking-widest">
                             <Image size={14} /> Profile Image
                         </label>
-                        <input
-                            required
-                            type="url"
-                            placeholder="Add Your Image Direct Link"
-                            className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
-                            value={formData.image}
-                            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                        />
+                        <input required type="url" placeholder="Add Your Image Direct Link" className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} />
                     </div>
                     <button
                         disabled={loading}

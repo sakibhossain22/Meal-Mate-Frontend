@@ -1,13 +1,11 @@
 
 import { Users, Utensils, ShoppingBag, DollarSign, Activity, CheckCircle, Clock, AlertCircle } from "lucide-react";
-import { userService } from "@/app/services/userService";
 import { adminStat } from "@/actions/meal.action";
 
 
 
 export default async function AdminStats() {
     const response = await adminStat();
-    // Error UI
     if (!response || response.error) {
         return (
             <div className="flex items-center justify-center min-h-[60vh] bg-slate-950">
@@ -23,10 +21,8 @@ export default async function AdminStats() {
             </div>
         );
     }
-
     const stats = response.data;
 
-    // UI Cards Configuration
     const cards = [
         { title: "Total Revenue", value: `$${stats.orders.totalRevenue.toFixed(2)}`, icon: <DollarSign className="text-emerald-400" />, color: "from-emerald-500/20 to-teal-500/20", border: "border-emerald-500/20" },
         { title: "Total Users", value: stats.users.total, icon: <Users className="text-blue-400" />, color: "from-blue-500/20 to-indigo-500/20", border: "border-blue-500/20" },
@@ -37,7 +33,6 @@ export default async function AdminStats() {
     return (
         <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
                 <header className="mb-10">
                     <div className="inline-flex items-center gap-2 bg-slate-900 px-4 py-2 rounded-full border border-slate-800 mb-4">
                         <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
@@ -45,8 +40,6 @@ export default async function AdminStats() {
                     </div>
                     <h1 className="text-4xl font-black text-white">Admin Insights</h1>
                 </header>
-
-                {/* Stats Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                     {cards.map((card, i) => (
                         <div key={i} className={`relative bg-slate-900 border ${card.border} p-6 rounded-[2.5rem] overflow-hidden group hover:bg-slate-800/50 transition-all`}>
@@ -60,9 +53,7 @@ export default async function AdminStats() {
                     ))}
                 </div>
 
-                {/* Detailed Analytics Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* User Breakdown */}
                     <section className="bg-slate-900/40 border border-slate-800/60 p-8 rounded-[2.5rem] backdrop-blur-md">
                         <div className="flex items-center justify-between mb-8">
                             <h2 className="text-xl font-bold flex items-center gap-2 italic"><Activity className="text-blue-400" /> User Traffic</h2>
@@ -80,7 +71,6 @@ export default async function AdminStats() {
                         </div>
                     </section>
 
-                    {/* Inventory Status */}
                     <section className="bg-slate-900/40 border border-slate-800/60 p-8 rounded-[2.5rem] backdrop-blur-md">
                         <div className="flex items-center justify-between mb-8">
                             <h2 className="text-xl font-bold flex items-center gap-2 italic"><CheckCircle className="text-orange-400" /> Meal Stock</h2>

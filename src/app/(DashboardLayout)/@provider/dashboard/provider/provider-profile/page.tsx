@@ -1,17 +1,5 @@
 import { profile } from "@/actions/customer.action";
-import {
-    User,
-    Mail,
-    Calendar,
-    ShieldCheck,
-    ShieldAlert,
-    Settings,
-    Clock,
-    Camera,
-    CreditCard,
-    ShoppingBag,
-    PhoneCallIcon
-} from "lucide-react";
+import { User, Mail, ShieldCheck, ShieldAlert, Settings, Clock, Camera, CreditCard, ShoppingBag, PhoneCallIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -33,11 +21,8 @@ export default async function ProviderProfile() {
                         <div className="relative group">
                             <div className="w-32 h-32 md:w-40 md:h-40 rounded-[2rem] bg-gradient-to-br from-blue-500 to-purple-600 p-1">
                                 <div className="w-full h-full bg-slate-900 rounded-[1.8rem] flex items-center justify-center overflow-hidden">
-                                    {user.image ? (
-                                        <img src={user.image} alt={user.name} className="w-full h-full object-cover" />
-                                    ) : (
-                                        <User size={64} className="text-slate-700" />
-                                    )}
+                                    {user.image ? <img src={user.image} alt={user.name} className="w-full h-full object-cover" /> : <User size={64} className="text-slate-700" />
+                                    }
                                 </div>
                             </div>
                             <button className="absolute bottom-2 right-2 p-2 bg-slate-800 border border-slate-700 rounded-xl text-white hover:bg-slate-700 transition-colors shadow-lg">
@@ -66,17 +51,15 @@ export default async function ProviderProfile() {
                                     <Clock size={14} className="text-orange-400" />
                                     <span className="text-slate-500">Joined: {new Date(user.createdAt).toLocaleDateString()}</span>
                                 </div>
-                                {user.emailVerified ? (
+                                {user.emailVerified ?
                                     <div className="flex items-center gap-2 text-xs bg-emerald-500/5 px-4 py-2 rounded-xl border border-emerald-500/10 text-emerald-500">
                                         <ShieldCheck size={14} />
                                         <span>Verified Account</span>
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center gap-2 text-xs bg-rose-500/5 px-4 py-2 rounded-xl border border-rose-500/10 text-rose-500 font-bold">
+                                    </div> : <div className="flex items-center gap-2 text-xs bg-rose-500/5 px-4 py-2 rounded-xl border border-rose-500/10 text-rose-500 font-bold">
                                         <ShieldAlert size={14} />
                                         <span>Verify Email</span>
                                     </div>
-                                )}
+                                }
                             </div>
                         </div>
 
