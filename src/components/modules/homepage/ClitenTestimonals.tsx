@@ -7,11 +7,11 @@ export default async function ClientTestimonials() {
     const reviews = res?.data || [];
     
     return (
-        <section className="py-20 bg-slate-50">
+        <section className="py-20">
             <div className="container mx-auto px-4 text-center">
                 <div className="mb-16">
                     <span className="text-[#f22e3e] font-bold uppercase tracking-widest text-sm">Customer Reviews</span>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-4">
+                    <h2 className="text-4xl md:text-5xl font-extrabold dark:text-slate-300 text-slate-900 mt-4">
                         What Our <span className="text-[#f22e3e]">Clients Say</span>
                     </h2>
                 </div>
@@ -20,7 +20,7 @@ export default async function ClientTestimonials() {
                     {reviews.map((review: any) => (
                         <div
                             key={review.id}
-                            className="bg-white p-8 rounded-[30px] shadow-sm border border-slate-100 relative group hover:shadow-xl transition-all duration-300"
+                            className="dark:bg-slate-900 p-8 rounded-[30px] shadow-sm border border-slate-100 relative group hover:shadow-xl transition-all duration-300"
                         >
                             <div className="absolute top-6 right-8 opacity-10 group-hover:opacity-20 transition-opacity">
                                 <Quote size={40} className="text-[#f22e3e]" />
@@ -37,7 +37,7 @@ export default async function ClientTestimonials() {
                             </div>
 
               
-                            <p className="text-slate-600 mb-8 italic leading-relaxed">
+                            <p className="text-slate-600 dark:text-slate-300 mb-8 italic leading-relaxed">
                                 "{review.comment}"
                             </p>
 
@@ -51,11 +51,11 @@ export default async function ClientTestimonials() {
                                             fill
                                             className="object-cover"
                                         />
-                                    </div> : <p className="font-bold text-2xl text-white rounded-full w-10 text-center items-center h-10 mx-2 bg-[#f22e3e]">{review.customer.name.charAt(0)}</p>
+                                    </div> : <p className="font-bold text-2xl  text-white rounded-full w-10 text-center items-center h-10 mx-2 bg-[#f22e3e]">{review.customer.name.charAt(0)}</p>
                                 }
 
                                 <div>
-                                    <h4 className="font-bold text-slate-900 leading-none mb-1">
+                                    <h4 className="font-bold dark:text-slate-300 text-slate-900 leading-none mb-1">
                                         {review.customer?.name}
                                     </h4>
                                     <span className="text-xs text-slate-400 font-medium">

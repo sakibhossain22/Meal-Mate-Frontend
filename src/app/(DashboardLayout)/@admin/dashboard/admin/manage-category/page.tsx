@@ -53,10 +53,7 @@ export default async function ManageCategory() {
                                         <p className="text-slate-500 text-sm font-medium">Total Items: {category.meals.length}</p>
                                     </div>
                                 </div>
-                                <div className="flex gap-3">
-                                    <Button variant="outline" className="border-slate-700 text-slate-400 hover:bg-slate-800 rounded-xl">Edit</Button>
-                                    <Button variant="ghost" size="icon" className="text-slate-500"><MoreHorizontal /></Button>
-                                </div>
+
                             </div>
 
                             {/* Meals List inside Category */}

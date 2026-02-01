@@ -31,13 +31,13 @@ export default function Strenght() {
     return (
         <div>
 
-            <section className="py-16 bg-white">
+            <section className="py-16">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {features.map((feature, index) => (
                             <div
                                 key={index}
-                                className="group p-8 rounded-[40px] border border-slate-100 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 text-center"
+                                className="group p-8 rounded-[40px] border border-gray-400 dark:border-slate-100 dark:bg-gray-900 bg-white transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 text-center"
                             >
                                 {/* Icon Container */}
                                 <div className={`w-20 h-20 ${feature.bgColor} rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform`}>
@@ -45,10 +45,10 @@ export default function Strenght() {
                                 </div>
 
                                 {/* Text Content */}
-                                <h3 className="text-xl font-extrabold text-slate-800 mb-4">
+                                <h3 className="text-xl font-extrabold dark:text-white  text-slate-800 mb-4">
                                     {feature.title}
                                 </h3>
-                                <p className="text-slate-500 leading-relaxed text-sm">
+                                <p className="text-slate-500 dark:text-slate:200 leading-relaxed text-sm">
                                     {feature.description}
                                 </p>
                             </div>

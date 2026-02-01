@@ -26,7 +26,7 @@ const LoginPage = () => {
       password: ""
     },
     validators: {
-      onChange: formSchema // রিয়েল-টাইম ভ্যালিডেশন
+      onChange: formSchema
     },
     onSubmit: async ({ value }) => {
       const toastId = toast.loading("Accessing account...")
