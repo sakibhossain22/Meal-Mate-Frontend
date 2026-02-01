@@ -55,8 +55,9 @@ export async function updateOrderStatus(id: string, status: string) {
   return { success: false, error: result.error };
 }
 
-export async function createOrderAction(cartItems: any[], totalPrice: number, Form: any) {
-  console.log(Form);
+export async function createOrderAction(cartItems: any[], totalPrice: number, formData: FormData) {
+  const address = formData.get("address"); 
+  console.log(address);
   const session = await userService.getSession();
   const user = session?.data?.user;
   const cookieStore = await cookies()
@@ -66,23 +67,24 @@ export async function createOrderAction(cartItems: any[], totalPrice: number, Fo
   }
 
 
-  // const res = await fetch(`${API_URL}/orders`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Cookie: cookieStore.toString(),
-  //   },
-  //   body: JSON.stringify({
-  //     totalPrice,
-  //     items: cartItems
-  //   }),
-  // });
-  // const result = await res.json();
+  const res = await fetch(`${API_URL}/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify({
+      totalPrice,
+      items: cartItems,
+      address
+    }),
+  });
+  const result = await res.json();
 
-  // if (res.ok) {
-  //   revalidatePath("/dashboard/customer/cart");
-  //   redirect("/dashboard/customer/manage-order")
-  //   return result;
-  // }
+  if (res.ok) {
+    revalidatePath("/dashboard/customer/cart");
+    redirect("/dashboard/customer/manage-order")
+    return result;
+  }
 
 }

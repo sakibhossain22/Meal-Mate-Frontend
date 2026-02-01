@@ -98,8 +98,9 @@ export default async function Cart() {
                     <LocateIcon size={14} /> Devlivery Address
                   </label>
                   <input
+                    name="address"
                     required
-                    type="url"
+                    type="text"
                     placeholder="Add Your Image Direct Link"
                     className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-12 px-5 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
 
