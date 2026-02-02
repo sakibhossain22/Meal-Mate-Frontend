@@ -3,6 +3,7 @@ import { Package, Receipt, Utensils, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { updateOrderStatus, updateOrderStatusCustomer } from "@/actions/order.action";
 
 export default async function ManageOrders() {
     const response = await customerOrder();
@@ -75,19 +76,18 @@ export default async function ManageOrders() {
                                         ))}
                                     </div>
 
-                                    <div className="flex flex-col justify-between p-6 bg-slate-950/30 rounded-3xl border border-slate-800/50">
-                                        <div className="space-y-4">
-                                            <div className="flex items-center gap-3 text-sm">
-                                                <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
-                                                <p className="text-slate-300">Order Placed Successfully</p>
-                                            </div>
-                                            <div className="flex items-center gap-3 text-sm opacity-50">
-                                                <div className="w-2 h-2 rounded-full bg-slate-700"></div>
-                                                <p className="text-slate-500 italic">Pending Provider Confirmation</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    <form
+                                        action={async () => {
+                                            "use server"
+                                            await updateOrderStatusCustomer(order?.id, "CANCELLED");
+                                        }}>
+                                        <Button
+                                            type="submit"
+                                            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#fbb200] px-4 py-6 font-semibold text-black transition hover:bg-[#f22e3e] hover:text-white"
+                                        >
+                                            Cancel Order
+                                        </Button>
+                                    </form>
                                 </div>
                             </div>
                         )) : <div className="text-center py-32 bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-800">

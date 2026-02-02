@@ -44,7 +44,7 @@ export async function createCategory(formData: FormData) {
             "Content-Type": "application/json",
             Cookie: cookieStore.toString()
         },
-        body: JSON.stringify({ id: name, name: name })
+        body: JSON.stringify({ name: name })
     })
     const data = await res.json()
     if (data) {

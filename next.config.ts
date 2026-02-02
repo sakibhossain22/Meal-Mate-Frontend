@@ -9,7 +9,15 @@ const nextConfig: NextConfig = {
         hostname: '*',
       }
     ]
-  }
+  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/api/auth/:path*",
+  //       destination: `${process.env.BACKEND_API}/api/auth/:path*`,
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;

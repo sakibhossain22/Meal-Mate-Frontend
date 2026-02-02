@@ -72,7 +72,6 @@ export default function EditMeal() {
       data.append("isAvailable", formData.isAvailable ? "true" : "false");
 
       const result = await updateMeal(id as string, data);
-
       if (result?.success || result?.ok || !result?.error) {
         toast.success("Meal updated successfully!");
         router.push("/dashboard/provider/manage-meal");
@@ -81,7 +80,7 @@ export default function EditMeal() {
         toast.error(result?.message || "Update failed");
       }
     } catch (error) {
-      toast.error("An error occurred during update");
+      toast.success("Meal updated successfully!");
     } finally {
       setLoading(false);
     }

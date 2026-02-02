@@ -92,12 +92,19 @@ export async function getCart() {
 }
 export async function providerMeal() {
   const cookieStore = await cookies()
-  const res = await fetch(`${API_URL}/meal`)
+  const res = await fetch(`${API_URL}/provider/allprovidermeal`, {
+    method: "GET",
+    headers: {
+      Cookie: cookieStore.toString()
+    }
+  })
   const data = await res.json()
-  const session = await userService.getSession()
-  const filteredData = data?.data?.meals.filter((data: any) => data.provider.userId === session.data.user.id)
-  return filteredData
+  return data 
 }
+
+
+
+
 export async function getSingleMeal(id: string) {
   const cookieStore = await cookies()
   const res = await fetch(`${API_URL}/meal/${id}`)
@@ -156,7 +163,7 @@ export async function updateMeal(id: string, formData: FormData) {
   const payload = {
     name,
     description,
-    price: parseFloat(price as string),
+    price: parseFloat(price as any),
     categoryId,
     isAvailable,
     image
@@ -177,6 +184,7 @@ export async function updateMeal(id: string, formData: FormData) {
   }
 
   const result = await res.json();
+  console.log(result);
   return result;
 }
 

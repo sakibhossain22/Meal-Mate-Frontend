@@ -31,6 +31,27 @@ export async function providerStats() {
 }
 
 
+export async function updateOrderStatusCustomer(id: string, status: string) {
+  const cookieStore = await cookies();
+
+  const statusData = {
+    status: status
+  }
+  console.log(statusData, id);
+  if (!status) return { error: "Status is required" };
+  const res = await fetch(`${API_URL}/orders/provider/update-order/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify(statusData),
+  });
+  const result = await res.json();
+  if (res.ok) {
+    revalidatePath("/dashboard/customer/manage-order");
+  }
+}
 export async function updateOrderStatus(id: string, status: string) {
   const cookieStore = await cookies();
 
@@ -50,6 +71,7 @@ export async function updateOrderStatus(id: string, status: string) {
   const result = await res.json();
   if (res.ok) {
     revalidatePath("/dashboard/provider/incoming-orders");
+    revalidatePath("/dashboard/customer/manage-order");
     return { success: true, data: result };
   }
   return { success: false, error: result.error };

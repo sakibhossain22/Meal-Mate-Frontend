@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default async function ManageMeal() {
-  const meals = await providerMeal() || []
-  console.log(meals);
+  const meal = await providerMeal() || []
+  const meals = meal?.data?.meals
+  console.log();
   return (
     <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200">
       <div className="max-w-6xl mx-auto">
@@ -31,7 +32,7 @@ export default async function ManageMeal() {
               <thead>
                 <tr className="border-b border-slate-800 bg-slate-900/60">
                   <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Meal Details</th>
-                  <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Category</th>
+                  <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Category ID</th>
                   <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Price</th>
                   <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Status</th>
                   <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Rating</th>
@@ -87,7 +88,7 @@ export default async function ManageMeal() {
                         </Link>
 
                         <form action={deleteMealProvider.bind(null, meal.id)}>
-                          <Button type="submit"variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-rose-500/10 hover:text-rose-500" >
+                          <Button type="submit" variant="ghost" size="icon" className="h-9 w-9 rounded-xl hover:bg-rose-500/10 hover:text-rose-500" >
                             <Trash2 size={18} />
                           </Button>
                         </form>

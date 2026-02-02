@@ -8,22 +8,29 @@ import { addMeal, getCategory } from '@/actions/meal.action';
 export default function AddMeal() {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
-
-  console.log(categories);
+  // console.log(categories);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: "",
     isAvailable: true,
-    categoryId: "Burger",
+    categoryId: categories[0]?.id,
     image: ""
   });
-
+  console.log(formData);
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const data = await getCategory()
-        setCategories(data.data);
+        const data = await getCategory();
+        const fetchedCategories = data.data;
+        setCategories(fetchedCategories);
+
+        if (fetchedCategories && fetchedCategories.length > 0) {
+          setFormData((prev) => ({
+            ...prev,
+            categoryId: fetchedCategories[0].id
+          }));
+        }
       } catch (error) {
         console.error("Failed to fetch:", error);
       }
@@ -54,7 +61,7 @@ export default function AddMeal() {
           description: "",
           price: "",
           isAvailable: true,
-          categoryId: "Burger",
+          categoryId: "",
           image: ""
         });
       } else {
