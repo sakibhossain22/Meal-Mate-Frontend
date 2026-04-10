@@ -6,16 +6,16 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import { ArrowBigRight, Loader2, Utensils } from "lucide-react";
+import { ArrowRight, Loader2, Utensils, Star, Clock } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function SelectCategory({ categories }: { categories: any[] }) {
+    // ... (logic remains same as before)
     const router = useRouter();
     const searchParams = useSearchParams();
-
     const [data, setData] = useState<any>(null)
     const [isLoading, setLoading] = useState(true)
 
-    // Sync state with URL params
     const queryCategory = searchParams.get("category") || "all"
     const currentPage = Number(searchParams.get("page")) || 1
     const orderby = searchParams.get("orderby") || "asc"
@@ -35,14 +35,13 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
     useEffect(() => {
         let isMounted = true;
         setLoading(true)
-
         const params = new URLSearchParams()
         if (queryCategory && queryCategory !== "all") params.append("category", queryCategory)
         params.append("page", currentPage.toString())
         params.append("limit", limit.toString())
         params.append("orderby", orderby)
 
-        const res = fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/meal?${params.toString()}`)
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/meal?${params.toString()}`)
             .then((res) => res.json())
             .then((resData) => {
                 if (isMounted) {
@@ -51,152 +50,136 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
                 }
             })
             .catch(err => {
-                console.error(err)
                 if (isMounted) setLoading(false)
             })
-        console.log(res)
         return () => { isMounted = false };
     }, [queryCategory, currentPage, orderby])
-    const handleCategoryChange = (value: string) => {
-        updateURL(value, 1, orderby)
-    }
-
-    const handleSortChange = (value: string) => {
-        updateURL(queryCategory, 1, value)
-    }
-
-    const handlePageChange = (page: number) => {
-        if (page >= 1 && page <= totalPages) {
-            updateURL(queryCategory, page, orderby)
-        }
-    }
 
     return (
-        <div className="space-y-8 min-h-[600px]">
-            {/* Filter Section */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 shadow-sm mb-8">
-                <div className="flex items-center gap-2">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-[#f22e3e] animate-pulse" />
-                    <p className="dark:text-slate-300 text-slate-700 font-medium">
-                        Showing <span className="text-[#f22e3e] font-bold">{meals?.length || 0}</span> Delicious Meals
-                    </p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                    <div className="flex items-center gap-3 w-full sm:w-auto">
-                        <Select onValueChange={handleCategoryChange} value={queryCategory}>
-                            <SelectTrigger className="w-full sm:w-44 h-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-800 font-semibold shadow-sm focus:ring-[#f22e3e]">
+        <div className="space-y-12 min-h-[800px] py-10">
+            {/* Header & Filter logic stays same... */}
+            <div className="container mx-auto px-4">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12">
+                    <h2 className="text-3xl md:text-5xl font-black tracking-tighter">Explore <span className="text-[#f22e3e]">Menu</span></h2>
+                    
+                    <div className="flex items-center gap-4 bg-zinc-100 dark:bg-zinc-900 p-2 rounded-[2rem]">
+                         <Select onValueChange={(v) => updateURL(v, 1, orderby)} value={queryCategory}>
+                            <SelectTrigger className="w-[150px] border-none bg-transparent font-bold cursor-pointer">
                                 <SelectValue placeholder="Category" />
                             </SelectTrigger>
-                            <SelectContent className="rounded-xl">
-                                <SelectGroup>
-                                    <SelectLabel>Categories</SelectLabel>
-                                    <SelectItem value="all">All Items</SelectItem>
-                                    {categories?.map((cat) => (
-                                        <SelectItem key={cat.id} value={cat.name}>{cat.name}</SelectItem>
-                                    ))}
-                                </SelectGroup>
+                            <SelectContent className="rounded-2xl">
+                                <SelectItem value="all" className="cursor-pointer">All Items</SelectItem>
+                                {categories?.map((cat) => (
+                                    <SelectItem key={cat.id} value={cat.name} className="cursor-pointer">{cat.name}</SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
-                    </div>
-
-                    <div className="flex items-center gap-3 w-full sm:w-auto">
-                        <Select onValueChange={handleSortChange} value={orderby}>
-                            <SelectTrigger className="w-full sm:w-44 h-11 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-800 font-semibold shadow-sm focus:ring-[#f22e3e]">
+                        <div className="h-6 w-[1px] bg-zinc-300 dark:bg-zinc-700" />
+                        <Select onValueChange={(v) => updateURL(queryCategory, 1, v)} value={orderby}>
+                            <SelectTrigger className="w-[150px] border-none bg-transparent font-bold cursor-pointer">
                                 <SelectValue placeholder="Sort By" />
                             </SelectTrigger>
-                            <SelectContent className="rounded-xl">
-                                <SelectItem value="asc">Price: Low to High</SelectItem>
-                                <SelectItem value="desc">Price: High to Low</SelectItem>
+                            <SelectContent className="rounded-2xl">
+                                <SelectItem value="asc" className="cursor-pointer">Low Price</SelectItem>
+                                <SelectItem value="desc" className="cursor-pointer">High Price</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
                 </div>
-            </div>
 
-            {/* Grid Section */}
-            <div>
                 {isLoading ? (
-                    <div className="flex flex-col justify-center items-center min-h-[400px] space-y-4">
-                        <Loader2 className="animate-spin text-[#f22e3e]" size={48} />
-                        <p className="text-slate-500 font-medium animate-pulse">Cooking up your results...</p>
-                    </div>
+                    <div className="flex justify-center py-40"><Loader2 className="animate-spin text-[#f22e3e]" size={40} /></div>
                 ) : (
-                    <>
-                        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                            {meals?.length > 0 ? meals.map((meal: any) => (
-                                <div key={meal.id} className="group relative overflow-hidden rounded-[2rem] border-none bg-white dark:bg-slate-900 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-transparent hover:border-orange-500/20">
-                                    <div className="relative h-60 w-full overflow-hidden bg-slate-50 dark:bg-slate-800/50">
-                                        <Image
-                                            quality={50}
-                                            src={meal.image || "/pizza.png"}
-                                            alt={meal.name}
-                                            fill
-                                            className="object-contain p-6 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6"
-                                        />
+                    <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        <AnimatePresence>
+                        {meals?.map((meal: any, idx: number) => (
+                            <motion.div 
+                                key={meal.id}
+                                layout
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="group relative bg-white dark:bg-zinc-900 rounded-[2.5rem] p-4 border border-zinc-100 dark:border-zinc-800 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(242,46,62,0.15)]"
+                            >
+                                {/* Image Container with Floating Price */}
+                                <div className="relative h-56 w-full rounded-[2rem] overflow-hidden bg-zinc-50 dark:bg-zinc-800/50 mb-6">
+                                    <Image
+                                        src={meal.image || "/pizza.png"}
+                                        alt={meal.name}
+                                        fill
+                                        className="object-contain p-4 transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <div className="absolute top-4 left-4 bg-[#f22e3e] text-white px-4 py-1 rounded-full text-sm font-black shadow-lg">
+                                        ${meal.price}
                                     </div>
-                                    <div className="p-6">
-                                        <div className="flex items-start justify-between gap-2 mb-2">
-                                            <h3 className="text-xl font-bold text-slate-800 dark:text-white line-clamp-1">{meal.name}</h3>
-                                            <span className="text-xl font-black text-[#f22e3e]">${meal.price}</span>
-                                        </div>
-                                        <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 h-10 mb-4 italic">
-                                            {meal.description || "No description available for this delicious meal."}
-                                        </p>
-                                        <Link href={`/meals/${meal.id}`} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#fbb200] px-4 py-3 font-bold text-black transition-all duration-300 hover:bg-[#f22e3e] hover:text-white hover:shadow-lg">
-                                            View Details <ArrowBigRight className="h-5 w-5" />
-                                        </Link>
+                                    <div className="absolute bottom-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md p-2 rounded-xl text-[10px] font-bold flex items-center gap-1 shadow-sm">
+                                        <Clock size={12} className="text-[#f22e3e]" /> 15-20 min
                                     </div>
                                 </div>
-                            )) : (
-                                <div className="col-span-full flex flex-col items-center justify-center py-24 bg-slate-50 dark:bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-slate-800">
-                                    <Utensils size={64} className="text-slate-300 mb-4" />
-                                    <h3 className="text-2xl font-bold text-slate-400">No Meals Found</h3>
-                                    <p className="text-slate-500 mt-2">Try adjusting your filters or category.</p>
+
+                                {/* Content */}
+                                <div className="px-3 pb-4">
+                                    <div className="flex items-center gap-1 mb-2">
+                                        {[...Array(5)].map((_, i) => <Star key={i} size={12} className="fill-[#fbb200] text-[#fbb200]" />)}
+                                        <span className="text-[10px] text-zinc-400 font-bold ml-1">(4.5)</span>
+                                    </div>
+                                    <h3 className="text-lg font-black text-zinc-900 dark:text-white mb-2 truncate group-hover:text-[#f22e3e] transition-colors">{meal.name}</h3>
+                                    <p className="text-xs text-zinc-500 line-clamp-2 h-8 mb-6 leading-relaxed">{meal.description || "Enjoy our chef-special meal."}</p>
+                                    
+                                    {/* PRIMARY COLOR BUTTON */}
+                                    <Link 
+                                        href={`/meals/${meal.id}`} 
+                                        className="flex items-center justify-center gap-2 w-full bg-[#f22e3e] hover:bg-[#d12331] text-white py-4 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all shadow-lg shadow-[#f22e3e]/20 active:scale-95 cursor-pointer"
+                                    >
+                                        Order Now <ArrowRight size={14} />
+                                    </Link>
                                 </div>
-                            )}
-                        </div>
+                            </motion.div>
+                        ))}
+                        </AnimatePresence>
+                    </div>
+                )}
 
-                        {/* Pagination Section */}
-                        {totalPages > 1 && (
-                            <div className="mt-16 pb-10">
-                                <Pagination>
-                                    <PaginationContent className="bg-white dark:bg-slate-900 p-2 rounded-2xl shadow-sm border dark:border-slate-800">
-                                        <PaginationItem>
-                                            <PaginationPrevious
-                                                className={`cursor-pointer transition ${currentPage <= 1 ? "opacity-30 pointer-events-none" : "hover:bg-orange-50"}`}
-                                                onClick={() => handlePageChange(currentPage - 1)}
-                                            />
+                {/* --- PAGINATION WITH IMPROVED GAP --- */}
+                {totalPages > 1 && !isLoading && (
+                    <div className="mt-24 flex justify-center pb-20">
+                        <Pagination>
+                            <PaginationContent className="gap-4"> {/* Increased Gap here */}
+                                <PaginationItem>
+                                    <PaginationPrevious
+                                        className={`cursor-pointer h-12 w-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border-none hover:bg-[#f22e3e] hover:text-white transition-all ${currentPage <= 1 && "opacity-20 pointer-events-none"}`}
+                                        onClick={() => updateURL(queryCategory, currentPage - 1, orderby)}
+                                    />
+                                </PaginationItem>
+
+                                <div className="flex items-center gap-3 mx-2"> {/* Extra wrapping gap for numbers */}
+                                    {Array.from({ length: totalPages }).map((_, i) => (
+                                        <PaginationItem key={i}>
+                                            <PaginationLink
+                                                isActive={currentPage === i + 1}
+                                                onClick={() => updateURL(queryCategory, i + 1, orderby)}
+                                                className={`cursor-pointer h-12 w-12 rounded-2xl font-black transition-all ${
+                                                    currentPage === i + 1 
+                                                    ? "bg-[#f22e3e] text-white shadow-xl shadow-[#f22e3e]/20 scale-110" 
+                                                    : "bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 border-none"
+                                                }`}
+                                            >
+                                                {i + 1}
+                                            </PaginationLink>
                                         </PaginationItem>
+                                    ))}
+                                </div>
 
-                                        {[...Array(totalPages)].map((_, i) => {
-                                            const pageNum = i + 1;
-                                            return (
-                                                <PaginationItem key={i} className="cursor-pointer">
-                                                    <PaginationLink
-                                                        isActive={currentPage === pageNum}
-                                                        className={`rounded-xl transition-all ${currentPage === pageNum ? "bg-[#f22e3e] text-white hover:bg-[#f22e3e]" : "hover:bg-orange-50"}`}
-                                                        onClick={() => handlePageChange(pageNum)}
-                                                    >
-                                                        {pageNum}
-                                                    </PaginationLink>
-                                                </PaginationItem>
-                                            )
-                                        })}
-
-                                        <PaginationItem>
-                                            <PaginationNext
-                                                className={`cursor-pointer transition ${currentPage >= totalPages ? "opacity-30 pointer-events-none" : "hover:bg-orange-50"}`}
-                                                onClick={() => handlePageChange(currentPage + 1)}
-                                            />
-                                        </PaginationItem>
-                                    </PaginationContent>
-                                </Pagination>
-                            </div>
-                        )}
-                    </>
+                                <PaginationItem>
+                                    <PaginationNext
+                                        className={`cursor-pointer h-12 w-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border-none hover:bg-[#f22e3e] hover:text-white transition-all ${currentPage >= totalPages && "opacity-20 pointer-events-none"}`}
+                                        onClick={() => updateURL(queryCategory, currentPage + 1, orderby)}
+                                    />
+                                </PaginationItem>
+                            </PaginationContent>
+                        </Pagination>
+                    </div>
                 )}
             </div>
         </div>
     );
-}   
+}
