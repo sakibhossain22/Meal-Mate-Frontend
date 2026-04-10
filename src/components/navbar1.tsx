@@ -39,6 +39,7 @@ const Navbar1 = ({
     { title: "Meals", url: "/meals" },
     { title: "Providers", url: "/providers" },
     { title: "Dashboard", url: "/dashboard" },
+    { title: "Blogs", url: "/blogs" },
   ],
   className,
 }: Navbar1Props) => {

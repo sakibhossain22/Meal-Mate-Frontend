@@ -21,12 +21,12 @@ export async function userSessionAction() {
 
 
 export async function getAllMeal(query: string) {
-  console.log(query);
+
 
   const res = await fetch(`${API_URL}/meal?${query}`, {
     cache: "no-store",
   });
-  // console.log(res);
+
   if (!res.ok) return { data: { meals: [] } };
   return res.json();
 }
@@ -129,7 +129,7 @@ export async function addMeal(formData: MealType) {
   });
 
   const data = await res.json();
-  console.log(data);
+
   return data;
 }
 
@@ -158,7 +158,6 @@ export async function updateMeal(id: string, formData: FormData) {
   const isAvailable = formData.get("isAvailable") === "true";
   const image = formData.get("image");
 
-  console.log("Extracted Data:", { name, price, id });
 
   const payload = {
     name,
@@ -184,7 +183,7 @@ export async function updateMeal(id: string, formData: FormData) {
   }
 
   const result = await res.json();
-  console.log(result);
+ 
   return result;
 }
 
@@ -205,7 +204,7 @@ export async function addReview(rating: number, comment: string, mealId: string,
   });
 
   const data = await res.json();
-  // console.log(data);
+
   if (res.ok) revalidatePath(`/meals/${mealId}`);
   return data;
 }

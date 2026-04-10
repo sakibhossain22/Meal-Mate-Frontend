@@ -3,7 +3,7 @@
 import { env } from "@/env";
 import { cookies } from "next/headers";
 
-const API_URL = env.API_URL || "http://localhost:5000"
+const API_URL = env.API_URL || "https://mealmate-server-sigma.vercel.app"
 
 
 export async function updateProviderProfile(formData: { name: string, phone: string, image: string }) {

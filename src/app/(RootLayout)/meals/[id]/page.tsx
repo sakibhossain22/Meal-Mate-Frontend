@@ -5,17 +5,16 @@ import ReviewForm from "@/components/ReviewForm";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ReviewType } from "@/types/index.type";
-import { ShoppingCart, Star, MessageSquareQuote, AlertCircle } from "lucide-react";
+import { ShoppingCart, Star, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function MealDetails({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    const response = await mealService.getSingleMealById(id);
+    const response = await mealService?.getSingleMealById(id);
     const data = response?.data;
-    const session = await userService.getSession();
-    console.log(session.data.user.role);
+    const session = await userService?.getSession();
 
     if (!data) {
         return (
@@ -32,14 +31,21 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
         );
     }
 
-    const handleAddToCart = addToCart.bind(null, data.id, 1)
+    const handleAddToCart = addToCart.bind(null, data.id, 1);
+
     return (
         <div className="dark:bg-slate-950 text-slate-200 min-h-screen p-4 md:p-10">
-            =            <div className="max-w-6xl mx-auto my-12 p-6 md:p-10 dark:bg-slate-900 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-800 flex flex-col md:flex-row gap-12 items-center">
+            <div className="max-w-6xl mx-auto my-12 p-6 md:p-10 dark:bg-slate-900 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-800 flex flex-col md:flex-row gap-12 items-center">
 
                 <div className="relative group w-full md:w-1/2 flex justify-center">
                     <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-rose-500/20 rounded-full blur-3xl opacity-60 scale-90 group-hover:scale-105 transition-transform duration-500"></div>
-                    <Image alt={data.name} width={500} height={500} src={data.image || "/pizza.png"} className="relative z-10 object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] group-hover:rotate-6 transition-transform duration-500" />
+                    <Image 
+                        alt={data?.name || "Meal Image"} 
+                        width={500} 
+                        height={500} 
+                        src={data?.image || "/pizza.png"} 
+                        className="relative z-10 object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] group-hover:rotate-6 transition-transform duration-500" 
+                    />
                 </div>
 
                 <div className="w-full md:w-1/2 space-y-6">
@@ -48,13 +54,13 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                             Hot & Fresh
                         </span>
                         <h1 className="text-4xl md:text-5xl font-black dark:text-white text-black mt-4 leading-tight">
-                            {data.name}
+                            {data?.name}
                         </h1>
                     </div>
 
                     <div className="flex items-center gap-6">
                         <h4 className="text-3xl font-extrabold text-orange-400">
-                            ${data.price}
+                            ${data?.price}
                         </h4>
                         <div className="h-8 w-px bg-slate-700"></div>
                         <div className="flex flex-col">
@@ -104,20 +110,28 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                             <p className="text-black dark:text-slate-200">{data?.description}</p>
                         </div>
                     </TabsContent>
+                    
                     <TabsContent value="review" className="focus-visible:outline-none">
-                        <ReviewForm mealId={data.id} userId={session.data.user.id} key={data.id} />
+                        {session?.data?.user ? (
+                            <ReviewForm mealId={data?.id} userId={session?.data?.user?.id} key={data?.id} />
+                        ) : (
+                            <div className="text-center p-6 bg-slate-900 rounded-xl mb-6 border border-dashed border-slate-700">
+                                <p className="text-slate-400">Please <Link href="/login" className="text-orange-500 font-bold">login</Link> to post a review.</p>
+                            </div>
+                        )}
+                        
                         <div className="grid gap-4">
-                            {data?.reviews?.length > 0 ? (
+                            {data?.reviews && data.reviews.length > 0 ? (
                                 data.reviews.map((review: ReviewType) => (
                                     <div
                                         key={review.id}
                                         className="flex flex-col md:flex-row md:items-start gap-5 dark:bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all shadow-sm">
                                         <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-rose-600 flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
-                                            {review.customer.name.charAt(0).toUpperCase()}
+                                            {review?.customer?.name?.charAt(0).toUpperCase() || "U"}
                                         </div>
                                         <div className="flex-grow">
                                             <div className="flex justify-between items-center mb-2">
-                                                <h1 className="text-lg font-bold text-black dark:text-slate-200">{review.customer.name}</h1>
+                                                <h1 className="text-lg font-bold text-black dark:text-slate-200">{review?.customer?.name}</h1>
                                                 <div className="flex items-center gap-1.5 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
                                                     <span className="text-amber-400 font-bold text-sm">{review.rating}</span>
                                                     <Star size={16} fill="#fbbf24" color="#fbbf24" />

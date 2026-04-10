@@ -6,7 +6,7 @@ import Link from "next/link";
 export default async function ManageMeal() {
   const meal = await providerMeal() || []
   const meals = meal?.data?.meals
-  console.log();
+
   return (
     <div className="bg-slate-950 min-h-screen p-4 md:p-10 text-slate-200">
       <div className="max-w-6xl mx-auto">

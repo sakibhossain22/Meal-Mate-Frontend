@@ -26,7 +26,7 @@ getAllMeal: async function (
     if (params?.page) query.append("page", params.page.toString())
     if (params?.limit) query.append("limit", params.limit.toString())
     if (params?.category) query.append("category", params.category)
-    console.log(query.toString())
+
 
     const res = await fetch(`${API_URL}/meal?${query.toString()}`, {
         cache: "no-store" 

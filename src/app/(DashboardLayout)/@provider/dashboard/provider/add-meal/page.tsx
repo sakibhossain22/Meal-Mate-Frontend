@@ -8,7 +8,7 @@ import { addMeal, getCategory } from '@/actions/meal.action';
 export default function AddMeal() {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
-  // console.log(categories);
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -17,7 +17,7 @@ export default function AddMeal() {
     categoryId: categories[0]?.id,
     image: ""
   });
-  console.log(formData);
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {

@@ -84,23 +84,10 @@ export default async function ProviderDetails({ params }: { params: Promise<{ id
                         >
                             <CardContent className="p-0">
                                 <div className="flex flex-col h-full">
-
-                                    {/* Image Section */}
                                     <div className="relative h-64 w-full overflow-hidden bg-slate-50 dark:bg-slate-800/50">
-                                        <Image
-                                            src={meal.image || "/pizza.png"}
-                                            alt={meal.name}
-                                            fill
-                                            className="object-contain p-8 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6"
-                                        />
-                                        <div className="absolute top-6 left-6">
-                                            <Badge className="bg-white/90 text-[#f22e3e] hover:bg-white border-none shadow-md backdrop-blur-md dark:bg-slate-900/90 font-bold uppercase tracking-widest text-[10px]">
-                                                {meal.categoryId}
-                                            </Badge>
-                                        </div>
-                                    </div>
+                                        <Image src={meal.image || "/pizza.png"} alt={meal.name}  fill className="object-contain p-8 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6" />
 
-                                    {/* Content Section */}
+                                    </div>
                                     <div className="flex flex-col flex-grow p-8">
                                         <div className="mb-3 flex items-center justify-between">
                                             <h3 className="text-2xl font-bold text-slate-800 dark:text-white group-hover:text-orange-500 transition-colors">
@@ -115,7 +102,6 @@ export default async function ProviderDetails({ params }: { params: Promise<{ id
                                             {meal.description.slice(0, 45) + "..."}
                                         </p>
 
-                                        {/* Link Button */}
                                         <div className="mt-auto">
                                             <Link
                                                 href={`/meals/${meal.id}`}
@@ -139,7 +125,6 @@ export default async function ProviderDetails({ params }: { params: Promise<{ id
                     ))}
                 </div>
 
-                {/* Empty State */}
                 {(!provider.meals || provider.meals.length === 0) && (
                     <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-[3rem] border-2 border-dashed border-slate-200 dark:border-slate-800">
                         <UtensilsCrossed size={48} className="mx-auto mb-4 text-slate-300" />

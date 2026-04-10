@@ -10,7 +10,7 @@ export default function IncomingOrders() {
   const [orders, setOrders] = useState<any[]>([]);
   const [fetching, setFetching] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
-  console.log(orders);
+
   const loadOrders = async () => {
     try {
       const response = await incomingOrder();
@@ -27,12 +27,12 @@ export default function IncomingOrders() {
 
   const handleUpdateStatus = async (e: React.FormEvent<HTMLFormElement>, orderItemId: string) => {
     e.preventDefault();
-    console.log(orderItemId);
+
 
     const form = e.currentTarget;
     const formData = new FormData(form);
     const newStatus = formData.get("status") as string;
-    console.log(newStatus);
+
     setUpdatingId(orderItemId);
 
     try {

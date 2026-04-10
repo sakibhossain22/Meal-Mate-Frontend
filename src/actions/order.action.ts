@@ -26,7 +26,7 @@ export async function providerStats() {
     }
   })
   const data = await res.json()
-  console.log(data);
+
   return data
 }
 
@@ -37,7 +37,7 @@ export async function updateOrderStatusCustomer(id: string, status: string) {
   const statusData = {
     status: status
   }
-  console.log(statusData, id);
+
   if (!status) return { error: "Status is required" };
   const res = await fetch(`${API_URL}/orders/provider/update-order/${id}`, {
     method: "PATCH",
@@ -79,7 +79,7 @@ export async function updateOrderStatus(id: string, status: string) {
 
 export async function createOrderAction(cartItems: any[], totalPrice: number, formData: FormData) {
   const address = formData.get("address"); 
-  console.log(address);
+
   const session = await userService.getSession();
   const user = session?.data?.user;
   const cookieStore = await cookies()

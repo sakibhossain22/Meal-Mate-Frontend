@@ -14,8 +14,7 @@ export async function updateUserStatus(userId: string, status: { status: string 
     } else if (status.status === "BANNED") {
         statusData = "ACTIVE"
     }
-    // console.log(status, "userId",     userId);
-    console.log(statusData);
+
 
     const res = await fetch(`${API_URL}/admin/update-user/${userId}`, {
         method: "PATCH",
@@ -83,7 +82,7 @@ export async function getAllReviewHome() {
 
 
 export async function deleteReview(id: string) {
-    console.log(id);
+
     const cookieStore = await cookies()
 
     const res = await fetch(`${API_URL}/admin/delete-reviews/${id}`, {

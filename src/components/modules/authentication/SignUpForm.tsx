@@ -59,7 +59,6 @@ export function SignupForm(props: React.ComponentProps<typeof Card>) {
         role : value.role.toUpperCase(),
         status : "ACTIVE"
       }
-      console.log(registerData);
       try {
         const { data, error } = await authClient.signUp.email(registerData)
         if (error) {

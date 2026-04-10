@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default async function AdminProfile() {
     const { data } = await profile();
-    console.log(data);
+
     const user = data;
 
     if (!user) return <div className="text-white p-10">User not found.</div>;

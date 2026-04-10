@@ -10,14 +10,14 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: "/api/auth/:path*",
-  //       destination: `${process.env.BACKEND_API}/api/auth/:path*`,
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: "/api/auth/:path*",
+        destination: `https://mealmate-server-sigma.vercel.app/api/auth/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

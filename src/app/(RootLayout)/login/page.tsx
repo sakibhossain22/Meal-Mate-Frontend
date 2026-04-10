@@ -61,10 +61,10 @@ const LoginPage = () => {
           <form.Field
             name="email" children={(field) => (
               <div className="relative w-full">
-                <input name={field.name} value={field.state.value} onBlur={field.handleBlur}  onChange={(e) => field.handleChange(e.target.value)} type="email" placeholder="Email Address" className="w-full h-12 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all" />
+                <input name={field.name} value={field?.state?.value} onBlur={field?.handleBlur}  onChange={(e) => field.handleChange(e?.target?.value)} type="email" placeholder="Email Address" className="w-full h-12 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all" />
                 <Mail className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/70" />
-                {field.state.meta.errors ? (
-                  <em className="text-xs text-red-400 ml-4 mt-1 block">{field.state.meta.errors.join(', ')}</em>
+                {field?.state?.meta?.errors ? (
+                  <em className="text-xs text-red-400 ml-4 mt-1 block">{field?.state?.meta?.errors?.join(', ')}</em>
                 ) : null}
               </div>
             )}
@@ -72,10 +72,10 @@ const LoginPage = () => {
           <form.Field
             name="password" children={(field) => (
               <div className="relative w-full">
-                <input  name={field.name} value={field.state.value} onBlur={field.handleBlur} onChange={(e) => field.handleChange(e.target.value)}  type="password"  placeholder="Password" className="w-full h-12 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all" />
+                <input  name={field?.name} value={field?.state.value} onBlur={field?.handleBlur} onChange={(e) => field?.handleChange(e?.target?.value)}  type="password"  placeholder="Password" className="w-full h-12 bg-transparent border-2 border-white/20 rounded-full outline-none text-white px-5 pr-12 placeholder:text-white/70 focus:border-white transition-all" />
                 <Lock className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/70" />
                 {field.state.meta.errors ? (
-                  <em className="text-xs text-red-400 ml-4 mt-1 block">{field.state.meta.errors.join(', ')}</em>
+                  <em className="text-xs text-red-400 ml-4 mt-1 block">{field?.state?.meta?.errors.join(', ')}</em>
                 ) : null}
               </div>
             )}
