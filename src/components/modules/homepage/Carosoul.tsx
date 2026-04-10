@@ -1,7 +1,7 @@
 import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ShoppingCart, Star, Clock, Heart } from "lucide-react"
+import { ShoppingCart, Star, Clock, Heart, ArrowRight } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -42,62 +42,70 @@ export async function CarouselSpacing() {
           <CarouselContent className="-ml-6">
             {meals.map((meal: any) => (
               <CarouselItem key={meal.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                <Card className="group relative border-none bg-zinc-50 dark:bg-zinc-900/50 rounded-[3rem] overflow-hidden transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(242,46,62,0.15)]">
+                
+                {/* --- কার্ড ডিজাইন যা SelectCategory এর সাথে হুবহু মিলবে --- */}
+                <Card className="group bg-white dark:bg-zinc-900 rounded-[2.5rem] p-4 border border-zinc-100 dark:border-zinc-800 shadow-sm transition-all duration-500 hover:shadow-2xl hover:shadow-[#f22e3e]/5">
                   <CardContent className="p-0">
                     
-                    {/* --- Top Image Layer --- */}
-                    <div className="relative h-72 w-full overflow-hidden">
+                    {/* Image Container - Height Fixed (h-56 like category) */}
+                    <div className="relative h-56 w-full rounded-[2rem] bg-zinc-100 dark:bg-zinc-800 mb-6 overflow-hidden">
                       <Image
                         src={meal.image || "/pizza.png"}
                         alt={meal.name}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="object-contain p-4 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
                       />
                       
-                      {/* Floating Price Tag */}
-                      <div className="absolute top-5 right-5 bg-white dark:bg-zinc-950 px-4 py-2 rounded-2xl shadow-xl">
-                        <span className="text-lg font-black text-[#f22e3e]">${meal.price}</span>
+                      {/* Floating Price Badge */}
+                      <div className="absolute top-4 left-4">
+                        <Badge className="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md text-[#f22e3e] border-none px-3 py-1 rounded-full font-black text-sm shadow-sm">
+                          ${meal.price}
+                        </Badge>
                       </div>
 
                       {/* Favorite Button */}
-                      <button className="absolute top-5 left-5 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-[#f22e3e] transition-colors">
+                      <button className="absolute top-4 right-4 w-10 h-10 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md rounded-full flex items-center justify-center text-zinc-400 hover:text-[#f22e3e] transition-colors shadow-sm">
                         <Heart size={18} />
                       </button>
-
-                      {/* Glassy Rating Badge */}
-                      <div className="absolute bottom-4 left-4 bg-white/60 dark:bg-black/40 backdrop-blur-xl px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-black">
-                        <Star size={14} className="fill-[#fbb200] text-[#fbb200]" /> 4.9 (120+)
-                      </div>
                     </div>
 
-                    {/* --- Content Layer --- */}
-                    <div className="p-8">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Badge className="bg-[#fbb200] text-black border-none text-[9px] font-black px-2 py-0.5 uppercase">Bestseller</Badge>
-                        <span className="text-[10px] font-bold text-zinc-400 flex items-center gap-1">
-                          <Clock size={12}/> 25 MIN
+                    {/* Content Section */}
+                    <div className="px-3 pb-4 space-y-4">
+                      {/* Stars & Category */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex gap-1 text-[#fbb200]">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} size={12} fill="currentColor" />
+                          ))}
+                        </div>
+                        <span className="text-[10px] font-black uppercase text-zinc-400 tracking-widest flex items-center gap-1">
+                          <Clock size={12} /> 20 MIN
                         </span>
                       </div>
-
-                      <h3 className="text-2xl font-black text-zinc-900 dark:text-white mb-3 tracking-tight line-clamp-1">
+                      
+                      {/* Title */}
+                      <h3 className="text-xl font-black text-zinc-900 dark:text-white leading-tight line-clamp-1">
                         {meal.name}
                       </h3>
                       
-                      <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed mb-8 line-clamp-2">
+                      {/* Description */}
+                      <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed line-clamp-2 min-h-[40px]">
                         {meal.description || "Freshly cooked with premium local ingredients."}
                       </p>
 
-                      {/* Primary Action Button */}
+                      {/* Action Button */}
                       <Link
                         href={`/meals/${meal._id || meal.id}`}
-                        className="group/btn relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-[#f22e3e] py-5 text-xs font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black shadow-lg shadow-[#f22e3e]/20 active:scale-95"
+                        className="group/btn relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-[#f22e3e] py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black shadow-lg shadow-[#f22e3e]/20 active:scale-95"
                       >
-                        <ShoppingCart size={18} className="group-hover/btn:rotate-12 transition-transform" />
                         Order Dish
+                        <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
                       </Link>
                     </div>
+
                   </CardContent>
                 </Card>
+
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -106,7 +114,7 @@ export async function CarouselSpacing() {
           <div className="mt-16 flex items-center justify-center gap-6">
             <CarouselPrevious className="static translate-y-0 h-14 w-14 rounded-full border-2 border-zinc-100 dark:border-zinc-800 hover:bg-[#f22e3e] hover:text-white transition-all shadow-sm" />
             <div className="h-1 w-20 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-               <div className="h-full w-1/2 bg-[#f22e3e] rounded-full animate-pulse" />
+                <div className="h-full w-1/2 bg-[#f22e3e] rounded-full" />
             </div>
             <CarouselNext className="static translate-y-0 h-14 w-14 rounded-full border-2 border-zinc-100 dark:border-zinc-800 hover:bg-[#f22e3e] hover:text-white transition-all shadow-sm" />
           </div>
