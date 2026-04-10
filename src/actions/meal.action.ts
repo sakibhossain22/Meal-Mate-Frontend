@@ -99,7 +99,7 @@ export async function providerMeal() {
     }
   })
   const data = await res.json()
-  return data 
+  return data
 }
 
 
@@ -183,7 +183,7 @@ export async function updateMeal(id: string, formData: FormData) {
   }
 
   const result = await res.json();
- 
+
   return result;
 }
 
@@ -207,4 +207,13 @@ export async function addReview(rating: number, comment: string, mealId: string,
 
   if (res.ok) revalidatePath(`/meals/${mealId}`);
   return data;
+}
+
+
+export async function getMealByCategory(category: string) {
+  const res = await fetch(`${API_URL}/meal?category=${category}&limit=5`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  return data?.data?.meals || [];
 }

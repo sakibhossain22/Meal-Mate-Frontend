@@ -1,4 +1,5 @@
 import { addToCart } from "@/actions/cart.action";
+import { getMealByCategory } from "@/actions/meal.action";
 import { mealService } from "@/app/services/meal.service";
 import { userService } from "@/app/services/userService";
 import ReviewForm from "@/components/ReviewForm";
@@ -13,6 +14,8 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
     const { id } = await params;
     const response = await mealService?.getSingleMealById(id);
     const data = response?.data;
+    const categoryMeals = await getMealByCategory(data?.category?.name || "Pizza");
+    
     const session = await userService?.getSession();
 
     if (!data) {
@@ -40,7 +43,7 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
             {/* --- Hero Section --- */}
             <div className="max-w-7xl mx-auto pt-10 px-4 md:px-10">
                 <div className="bg-white dark:bg-zinc-900 rounded-[3.5rem] p-8 md:p-16 border border-zinc-100 dark:border-zinc-800 shadow-2xl flex flex-col lg:flex-row gap-16 items-center overflow-hidden relative">
-                    
+
                     {/* Decorative Background Glows */}
                     <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#f22e3e]/5 blur-[100px] rounded-full" />
                     <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-[#fbb200]/5 blur-[100px] rounded-full" />
@@ -48,12 +51,12 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                     {/* Image Column */}
                     <div className="relative group w-full lg:w-1/2 flex justify-center">
                         <div className="absolute inset-0 bg-gradient-to-tr from-[#f22e3e]/10 to-[#fbb200]/10 rounded-full blur-[80px] scale-90 group-hover:scale-110 transition-transform duration-700"></div>
-                        <Image 
-                            alt={data?.name} 
-                            width={600} 
-                            height={600} 
-                            src={data?.image || "/pizza.png"} 
-                            className="relative z-10 object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.15)] group-hover:scale-105 group-hover:rotate-2 transition-all duration-700" 
+                        <Image
+                            alt={data?.name}
+                            width={600}
+                            height={600}
+                            src={data?.image || "/pizza.png"}
+                            className="relative z-10 object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.15)] group-hover:scale-105 group-hover:rotate-2 transition-all duration-700"
                         />
                     </div>
 
@@ -146,7 +149,7 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                             </div>
                         </div>
                     </TabsContent>
-                    
+
                     <TabsContent value="review" className="focus-visible:outline-none space-y-8">
                         {session?.data?.user ? (
                             <ReviewForm mealId={data?.id} userId={session?.data?.user?.id} key={data?.id} />
@@ -157,7 +160,7 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                                 </p>
                             </div>
                         )}
-                        
+
                         <div className="grid gap-6">
                             {data?.reviews && data.reviews.length > 0 ? (
                                 data.reviews.map((review: ReviewType) => (
