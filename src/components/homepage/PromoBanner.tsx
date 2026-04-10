@@ -1,4 +1,5 @@
 import { Zap, Gift, Flame, ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function OffersSection() {
   return (
@@ -6,7 +7,7 @@ export default function OffersSection() {
       <div className="flex flex-col mb-16">
         <span className="text-[#f22e3e] font-black uppercase tracking-[0.3em] text-xs mb-4">Limited Time</span>
         <h2 className="text-6xl font-black text-zinc-950 dark:text-white tracking-tighter">
-          Exclusive <br/> <span className="bg-gradient-to-r from-[#f22e3e] to-[#fbb200] bg-clip-text text-transparent">Privileges.</span>
+          Exclusive <br /> <span className="bg-gradient-to-r from-[#f22e3e] to-[#fbb200] bg-clip-text text-transparent">Privileges.</span>
         </h2>
       </div>
 
@@ -19,9 +20,11 @@ export default function OffersSection() {
           <div className="relative z-10">
             <h3 className="text-4xl font-black mb-2">Weekend Mega Feast</h3>
             <p className="text-zinc-400 max-w-sm mb-6">Order more than 1000 BDT and get a surprise dessert box for free!</p>
-            <button className="bg-white text-black font-bold px-8 py-3 rounded-full flex items-center gap-2 w-fit active:scale-95 transition-all">
-              Claim Now <ArrowUpRight size={18}/>
-            </button>
+            <Link href="/meals" className="w-fit">
+              <button className="bg-white cursor-pointer text-black font-bold px-8 py-3 rounded-full flex items-center gap-2 w-fit active:scale-95 transition-all">
+                Claim Now <ArrowUpRight size={18} />
+              </button>
+            </Link>
           </div>
           <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-[#f22e3e]/20 blur-[100px] group-hover:bg-[#f22e3e]/40 transition-all duration-700" />
         </div>
