@@ -14,12 +14,12 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
 
     const [data, setData] = useState<any>(null)
     const [isLoading, setLoading] = useState(true)
-    
+
     // Sync state with URL params
     const queryCategory = searchParams.get("category") || "all"
     const currentPage = Number(searchParams.get("page")) || 1
     const orderby = searchParams.get("orderby") || "asc"
-    
+
     const limit = 8
     const meals = data?.data?.meals
     const totalPages = data?.data?.pagination?.totalPages || 1
@@ -42,7 +42,7 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
         params.append("limit", limit.toString())
         params.append("orderby", orderby)
 
-        fetch(`https://mealmate-server-sigma.vercel.app/meal?${params.toString()}`)
+        const res = fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/meal?${params.toString()}`)
             .then((res) => res.json())
             .then((resData) => {
                 if (isMounted) {
@@ -54,10 +54,9 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
                 console.error(err)
                 if (isMounted) setLoading(false)
             })
-            
+        console.log(res)
         return () => { isMounted = false };
     }, [queryCategory, currentPage, orderby])
-
     const handleCategoryChange = (value: string) => {
         updateURL(value, 1, orderby)
     }
@@ -128,12 +127,12 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
                             {meals?.length > 0 ? meals.map((meal: any) => (
                                 <div key={meal.id} className="group relative overflow-hidden rounded-[2rem] border-none bg-white dark:bg-slate-900 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-transparent hover:border-orange-500/20">
                                     <div className="relative h-60 w-full overflow-hidden bg-slate-50 dark:bg-slate-800/50">
-                                        <Image 
-                                            quality={50} 
-                                            src={meal.image || "/pizza.png"} 
-                                            alt={meal.name} 
-                                            fill 
-                                            className="object-contain p-6 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6" 
+                                        <Image
+                                            quality={50}
+                                            src={meal.image || "/pizza.png"}
+                                            alt={meal.name}
+                                            fill
+                                            className="object-contain p-6 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6"
                                         />
                                     </div>
                                     <div className="p-6">
@@ -169,7 +168,7 @@ export default function SelectCategory({ categories }: { categories: any[] }) {
                                                 onClick={() => handlePageChange(currentPage - 1)}
                                             />
                                         </PaginationItem>
-                                        
+
                                         {[...Array(totalPages)].map((_, i) => {
                                             const pageNum = i + 1;
                                             return (

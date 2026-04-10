@@ -80,7 +80,7 @@ export default function SignupPage() {
         }
 
         if (value.role === "Provider" && data?.user) {
-          const profileRes = await fetch("https://mealmate-server-sigma.vercel.app/provider/create", {
+          const profileRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/provider/create`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
