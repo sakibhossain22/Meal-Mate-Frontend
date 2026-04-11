@@ -1,10 +1,7 @@
 import { getDeliveryStats } from "@/actions/delivery.action";
+import DeliveryStatsDashboard from "@/components/dashboard/DeliveryStats";
 
 export default async function  ManageUser() {
     const stats = await getDeliveryStats()
-    return (
-        <div>
-            <h1>Stats</h1>
-        </div>
-    );
+    return <DeliveryStatsDashboard stats={stats} />
 }
