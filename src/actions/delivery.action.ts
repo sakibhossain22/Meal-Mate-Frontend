@@ -7,18 +7,15 @@ const API_URL = process.env.API_URL
 export async function acceptOrder(orderId: string, deliveryManId: string) {
     const cookieStore = await cookies()
     const response = await fetch(`${API_URL}/delivery/accept-order`, {
-        method: "POST",
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             Cookie: cookieStore.toString(),
         },
         body: JSON.stringify({ orderId, deliveryManId }),
     })
-    if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || "Failed to accept order")
-    }
-    return response.json()
+   const data = await response.json()
+   return data
 }
 
 export async function updateDeliveryStatus(orderId: string, status: string) {
