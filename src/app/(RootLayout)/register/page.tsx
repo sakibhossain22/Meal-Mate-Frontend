@@ -76,7 +76,6 @@ export default function SignupPage() {
           role: value.role.toUpperCase(),
           status: "ACTIVE"
         })
-        console.log("normal User Reg ", data)
         if (error) {
           toast.error(error.message, { id: toastId })
           return

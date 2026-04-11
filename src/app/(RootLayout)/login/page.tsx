@@ -9,7 +9,7 @@ import { toast } from "sonner"
 import * as z from "zod"
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   password: z.string().min(8, "Minimum length is 8"),
@@ -18,7 +18,7 @@ const formSchema = z.object({
 
 const LoginPage = () => {
   const [isPending, setIsPending] = React.useState(false);
-
+  const router = useRouter();
   const form = useForm({
     defaultValues: { email: "", password: "" },
     validators: { onChange: formSchema },
@@ -27,13 +27,15 @@ const LoginPage = () => {
       const toastId = toast.loading("Accessing account...")
       try {
         const { error } = await authClient.signIn.email(value)
+        // console.log(error)
         if (error) {
           toast.error(error.message, { id: toastId })
           return
         }
         toast.success("Welcome back!", { id: toastId })
-        redirect("/dashboard")
+        router.push('/dashboard')
       } catch (error) {
+        console.log(error)
         toast.error("Something Went Wrong", { id: toastId })
       } finally {
         setIsPending(false);

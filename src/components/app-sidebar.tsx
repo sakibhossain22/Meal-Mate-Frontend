@@ -21,6 +21,8 @@ import { adminRoutes } from "@/routes/adminRoutes"
 import { providerRoutes } from "@/routes/providerRoutes"
 import { Route } from "@/types/index.type"
 import { cn } from "@/lib/utils"
+import { deliveryRoutes } from "@/routes/deliveyRoutes"
+import { superadminRoutes } from "@/routes/superadminRoutes"
 
 export function AppSidebar({ user, ...props }: { user: { role?: string } } & React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
@@ -40,14 +42,20 @@ export function AppSidebar({ user, ...props }: { user: { role?: string } } & Rea
     case "provider":
       routes = providerRoutes;
       break;
+    case "superadmin":
+      routes = superadminRoutes
+      break;
+    case "delivery":
+      routes = deliveryRoutes
+      break;
     default:
       routes = [];
   }
 
   return (
-    <Sidebar 
-      {...props} 
-      className="border-r border-slate-800" 
+    <Sidebar
+      {...props}
+      className="border-r border-slate-800"
       collapsible="icon"
     >
       <SidebarContent className="bg-[#04193e] text-slate-300">
@@ -81,13 +89,13 @@ export function AppSidebar({ user, ...props }: { user: { role?: string } } & Rea
                           tooltip={item.title}
                           className={cn(
                             "group/menu-btn h-11 w-full rounded-xl px-4 transition-all duration-200",
-                            isActive 
-                              ? "bg-blue-600 text-white shadow-md shadow-blue-900/40" 
+                            isActive
+                              ? "bg-blue-600 text-white shadow-md shadow-blue-900/40"
                               : "hover:bg-white/10 hover:text-white"
                           )}
                         >
-                          <Link 
-                            href={item.url} 
+                          <Link
+                            href={item.url}
                             onClick={() => setOpenMobile(false)}
                             className="flex items-center gap-3"
                           >
