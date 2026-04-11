@@ -18,7 +18,7 @@ export default function ManageOrder({ orders }: { orders: any[] }) {
   // স্ট্যাটাস অনুযায়ী কালার কোড
   const getStatusStyle = (status: string) => {
     switch (status) {
-      case 'DELIVERED': return 'bg-secondary/10 text-secondary border-secondary/20';
+      case 'DELIVERED': return 'bg-secondary/10 text-white/50 border-secondary/20';
       case 'PENDING': return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
       case 'ON_THE_WAY': return 'bg-sky-500/10 text-sky-500 border-sky-500/20';
       case 'CANCELLED': return 'bg-rose-500/10 text-rose-500 border-rose-500/20';
@@ -31,7 +31,7 @@ export default function ManageOrder({ orders }: { orders: any[] }) {
       {/* Header Section */}
       <div className="mb-10">
         <h1 className="text-4xl font-black tracking-tighter flex items-center gap-3 italic">
-          <ShoppingBag className="text-primary" size={36} /> LIVE ORDERS
+          <ShoppingBag className="text-white" size={36} /> LIVE ORDERS
         </h1>
         <p className="text-slate-500 mt-1 font-medium tracking-wide">Monitor and manage all system transactions in real-time.</p>
       </div>
@@ -46,7 +46,7 @@ export default function ManageOrder({ orders }: { orders: any[] }) {
             {/* Top Bar: Order Info & Status */}
             <div className="p-6 md:p-8 flex flex-wrap items-center justify-between gap-6 border-b border-white/5">
               <div className="flex items-center gap-5">
-                <div className="p-4 bg-primary/10 rounded-2xl text-primary group-hover:bg-primary group-hover:text-black transition-all duration-500">
+                <div className="p-4 bg-primary/10 rounded-2xl group-hover:bg-primary group-hover:text-black transition-all duration-500">
                   <ShoppingBag size={24} />
                 </div>
                 <div>
@@ -88,11 +88,11 @@ export default function ManageOrder({ orders }: { orders: any[] }) {
             {/* Middle Bar: Items Summary */}
             <div className="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
               <div className="lg:col-span-2 space-y-4">
-                <div className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-4">Ordered Items</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] mb-4">Ordered Items</div>
                 {order.items.map((item: any) => (
                   <div key={item.id} className="flex items-center justify-between bg-white/[0.03] p-4 rounded-2xl border border-white/5">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-primary font-bold">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center font-bold">
                         {item.quantity}x
                       </div>
                       <div>
@@ -110,7 +110,7 @@ export default function ManageOrder({ orders }: { orders: any[] }) {
               {/* Price Summary Card */}
               <div className="bg-primary/[0.03] border border-primary/10 rounded-3xl p-6 text-center">
                 <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Grand Total</div>
-                <div className="text-4xl font-black text-primary tracking-tighter">${order.totalPrice}</div>
+                <div className="text-4xl font-black tracking-tighter">${order.totalPrice}</div>
                 <button className="mt-6 w-full py-3 bg-white/5 hover:bg-white/10 rounded-xl text-xs font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2 cursor-pointer border border-white/5">
                   View Details <ChevronRight size={14} />
                 </button>

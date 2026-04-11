@@ -47,14 +47,14 @@ export default function ManageCategories({ categories }: { categories: any[] }) 
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
         <div>
           <h1 className="text-4xl font-black tracking-tighter flex items-center gap-3">
-            <Hash className="text-primary" size={32} /> Category Lab
+            <Hash className="text-white" size={32} /> Category Lab
           </h1>
           <p className="text-slate-400 mt-1">Manage global collections with precision.</p>
         </div>
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center justify-center gap-2 bg-primary hover:bg-orange-600 text-black font-bold px-8 py-4 rounded-2xl transition-all active:scale-95 shadow-lg shadow-primary/20 cursor-pointer"
+          className="flex items-center justify-center gap-2 bg-white/60 hover:bg-orange-600 text-black font-bold px-8 py-4 rounded-2xl transition-all active:scale-95 shadow-lg shadow-primary/20 cursor-pointer"
         >
           <Plus size={20} strokeWidth={3} />
           <span>New Collection</span>
@@ -72,16 +72,16 @@ export default function ManageCategories({ categories }: { categories: any[] }) 
             <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-3xl" />
 
             {/* Icon Container */}
-            <div className="relative z-10 mb-6 p-6 rounded-3xl bg-white/[0.03] text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-500">
+            <div className="relative z-10 mb-6 p-6 rounded-3xl bg-white/[0.03] group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all duration-500">
               {getCategoryIcon(category.name)}
             </div>
 
             {/* Content */}
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold tracking-tight text-white group-hover:text-primary transition-colors">
+              <h3 className="text-2xl font-bold tracking-tight text-white group-hover:transition-colors">
                 {category.name}
               </h3>
-              <div className="mt-2 inline-block px-4 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-[10px] font-black text-secondary tracking-widest uppercase">
+              <div className="mt-2 inline-block px-4 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-[10px] font-black text-white tracking-widest uppercase">
                 {category.meals?.length || 0} Products
               </div>
             </div>
@@ -103,7 +103,7 @@ export default function ManageCategories({ categories }: { categories: any[] }) 
 
             <form action={handleAddCategory} className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-primary ml-1">
+                <label className="text-[10px] font-black uppercase tracking-widest ml-1">
                   Name
                 </label>
                 <input

@@ -64,7 +64,7 @@ export default function ManageUsers({ allUsers }: { allUsers: any[] }) {
           <p className="text-slate-500 mt-1 font-medium tracking-wide">Manage permissions and status for all registered accounts.</p>
         </div>
         <div className="bg-white/5 border border-white/10 px-6 py-2 rounded-2xl flex items-center gap-3">
-           <span className="text-primary font-black text-xl">{allUsers.length}</span>
+           <span className="font-black text-xl">{allUsers.length}</span>
            <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Total Users</span>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function ManageUsers({ allUsers }: { allUsers: any[] }) {
               </div>
 
               <div className="flex-1 overflow-hidden">
-                <h3 className="text-lg font-bold truncate group-hover:text-primary transition-colors italic">{user.name}</h3>
+                <h3 className="text-lg font-bold truncate group-hover:transition-colors italic">{user.name}</h3>
                 <p className="text-xs text-slate-500 truncate flex items-center gap-1">
                   <Mail size={12} /> {user.email}
                 </p>

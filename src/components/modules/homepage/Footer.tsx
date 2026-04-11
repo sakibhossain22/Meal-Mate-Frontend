@@ -1,8 +1,34 @@
+"use client";
+
 import { Facebook, Instagram, Twitter, Mail, MapPin, Phone, Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // if (!email) {
+    //   toast.error("Please provide a valid email!");
+    //   return;
+    // }
+
+    setLoading(true);
+
+    // Mimic API Call
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Email sent! Welcome to the Meal Mate Team 🍲", {
+        description: "You've successfully joined our meal revolution.",
+        duration: 5000,
+      });
+      setEmail(""); // Form clear korar jonno
+    }, 1500);
+  };
   return (
     <footer className="bg-slate-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-6 md:px-12">
@@ -20,8 +46,18 @@ export default function Footer() {
               crafted with love and the finest ingredients right to your doorstep.
             </p>
             <div className="flex items-center gap-4">
-              {[Facebook, Instagram, Twitter].map((Icon, i) => (
-                <Link key={i} href="#" className="h-10 w-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#f22e3e] transition-colors duration-300">
+              {[
+                { Icon: Facebook, href: "https://facebook.com/sakib.hossain93" },
+                { Icon: Instagram, href: "https://instagram.com/sakib.hossain93" },
+                { Icon: Twitter, href: "https://twitter.com/sakibhossain22" },
+              ].map(({ Icon, href }, i) => (
+                <Link
+                  key={i}
+                  href={href}
+                  target="_blank" // নতুন ট্যাবে ওপেন করার জন্য
+                  rel="noopener noreferrer" // সিকিউরিটির জন্য
+                  className="h-10 w-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-[#f22e3e] transition-colors duration-300"
+                >
                   <Icon size={18} />
                 </Link>
               ))}
@@ -73,9 +109,10 @@ export default function Footer() {
           <div>
             <h4 className="text-xl font-bold mb-6 border-b-2 border-[#f22e3e] w-fit">Newsletter</h4>
             <p className="text-slate-400 mb-6">Subscribe to get the latest offers and menu updates.</p>
-            <form className="relative">
+            <form onSubmit={handleSubscribe} className="relative">
               <input
                 type="email"
+                required
                 placeholder="Your Email"
                 className="w-full bg-slate-800 border border-slate-700 rounded-full py-3 px-6 focus:outline-none focus:border-[#f22e3e] transition-colors"
               />

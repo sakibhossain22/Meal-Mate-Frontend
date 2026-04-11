@@ -1,8 +1,8 @@
 
 import { Toaster } from "sonner";
-import "../globals.css";
 import { Navbar1 } from "@/components/navbar1";
 import Footer from "@/components/modules/homepage/Footer";
+import ChatBot from "@/components/ChatBot";
 
 
 export default function RootLayout({
@@ -14,6 +14,7 @@ export default function RootLayout({
     <div>
       <Navbar1 className="justify-center items-center flex mx-auto px-2" />
       {children}
+      <ChatBot />
       <Footer />
       <Toaster richColors />
     </div>

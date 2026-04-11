@@ -9,7 +9,7 @@ const API_URL = env.API_URL
 // Profile Current User
 export async function profile() {
   const cookieStore = await cookies()
-  const res = await fetch(`${API_URL}/profile`, {
+  const res = await fetch(`${API_URL}/profile/user`, {
     headers: {
       Cookie: cookieStore.toString()
     }

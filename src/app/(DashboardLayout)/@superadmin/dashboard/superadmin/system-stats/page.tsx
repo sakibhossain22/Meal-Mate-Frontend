@@ -1,47 +1,38 @@
-
 import { getSystemStats } from "@/actions/superadmin.action";
 import { DollarSign, ShoppingBag, Users, Layers3, Zap, AlertTriangle, Clock3, Star } from "lucide-react";
+import Image from "next/image";
 
 export default async function SuperAdminDashboard() {
-  const statsData = await getSystemStats(); // এই ফাংশনটি তোমার সার্ভার থেকে ডেটা নিয়ে আসবে
+  const statsData = await getSystemStats();
   const { overview, today, userSegments, recentActivity, alerts } = statsData?.data;
 
-  // Overview Cards Configuration
+  // Overview Cards Configuration - Solid White colors with fixed background
   const overviewCards = [
-    { label: "Total Revenue", value: `$${overview.totalRevenue}`, icon: DollarSign, color: "text-primary" },
-    { label: "Total Orders", value: overview.totalOrders, icon: ShoppingBag, color: "text-secondary" },
-    { label: "Avg Order Value", value: `$${overview.averageOrderValue}`, icon: Zap, color: "text-amber-400" },
-    { label: "Food Categories", value: overview.totalCategories, icon: Layers3, color: "text-sky-400" },
+    { label: "Total Revenue", value: `$${overview.totalRevenue}`, icon: DollarSign, opacity: "opacity-100" },
+    { label: "Total Orders", value: overview.totalOrders, icon: ShoppingBag, opacity: "opacity-80" },
+    { label: "Avg Order Value", value: `$${overview.averageOrderValue}`, icon: Zap, opacity: "opacity-60" },
+    { label: "Food Categories", value: overview.totalCategories, icon: Layers3, opacity: "opacity-40" },
   ];
 
-  // User Segments Map to get color and icons
-  const roleMap: any = {
-    SUPERADMIN: { color: "text-rose-400", bg: "bg-rose-500/10" },
-    ADMIN: { color: "text-purple-400", bg: "bg-purple-500/10" },
-    PROVIDER: { color: "text-primary", bg: "bg-primary/10" },
-    DELIVERY: { color: "text-secondary", bg: "bg-secondary/10" },
-    CUSTOMER: { color: "text-blue-400", bg: "bg-blue-500/10" },
-  };
-
   return (
-    <div className="p-6 md:p-10 space-y-10 bg-dark min-h-screen text-white">
-      
+    <div className="p-6 md:p-10 space-y-10 bg-black min-h-screen text-white selection:bg-white selection:text-black font-sans">
+
       {/* Header with Alerts */}
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-white/10 pb-10">
         <div>
-          <h1 className="text-4xl font-extrabold tracking-tighter">System Intelligence</h1>
-          <p className="text-slate-400 mt-1">Real-time overview of MealMate platform.</p>
+          <h1 className="text-4xl font-black tracking-tighter uppercase italic">System Intelligence</h1>
+          <p className="text-white/40 mt-1 font-bold text-[10px] uppercase tracking-[0.2em]">Real-time overview of BhojonBari platform</p>
         </div>
-        
-        {/* Extreme Cool Alert Card */}
+
+        {/* Extreme Cool Alert Card - Solid White Alert */}
         {alerts.pendingProviderApprovals > 0 && (
-          <div className="glass-card p-4 px-6 flex items-center gap-4 border-rose-500/20 bg-rose-500/5 animate-pulse">
-            <div className="p-3 rounded-full bg-rose-500/10 text-rose-400">
-              <AlertTriangle size={24} />
+          <div className="bg-white/5 border border-white/20 p-4 px-6 flex items-center gap-4 rounded-[2rem] animate-pulse">
+            <div className="p-3 rounded-full bg-white text-black">
+              <AlertTriangle size={20} />
             </div>
             <div>
-              <div className="text-2xl font-bold text-rose-400">{alerts.pendingProviderApprovals}</div>
-              <div className="text-xs text-rose-300/80 uppercase font-medium tracking-wider">Pending Approvals</div>
+              <div className="text-2xl font-black tracking-tighter">{alerts.pendingProviderApprovals}</div>
+              <div className="text-[8px] text-white/50 uppercase font-black tracking-widest">Pending Approvals</div>
             </div>
           </div>
         )}
@@ -50,17 +41,17 @@ export default async function SuperAdminDashboard() {
       {/* 1. Overview Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {overviewCards.map((card, i) => (
-          <div key={i} className="glass-card glass-card-hover p-8 flex flex-col justify-between group">
+          <div key={i} className="bg-white/[0.03] border border-white/10 p-8 rounded-[2.5rem] flex flex-col justify-between group hover:bg-white/[0.05] transition-all duration-500">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-medium text-slate-400 group-hover:text-slate-200 transition-colors">{card.label}</span>
-              <card.icon className={`${card.color} opacity-80`} size={20} />
+              <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.2em]">{card.label}</span>
+              <card.icon className="text-white opacity-40 group-hover:opacity-100 transition-opacity" size={20} />
             </div>
-            <h3 className="text-4xl font-extrabold mt-4 tracking-tight group-hover:scale-105 transition-transform origin-left">{card.value}</h3>
-            {/* Today's Stats Indicator */}
-            <div className="mt-6 pt-4 border-t border-white/5 text-xs text-slate-500 flex justify-between">
-              <span>Today:</span>
-              <span className={i === 0 || i === 1 ? "text-slate-300 font-bold" : ""}>
-                {i === 0 ? `$${today.revenue}` : i === 1 ? today.orders : "N/A"}
+            <h3 className="text-4xl font-black mt-4 tracking-tighter group-hover:scale-105 transition-transform origin-left italic">{card.value}</h3>
+
+            <div className="mt-6 pt-4 border-t border-white/5 text-[9px] font-black uppercase tracking-widest text-white/20 flex justify-between">
+              <span>Cycle Today:</span>
+              <span className="text-white/60 font-black">
+                {i === 0 ? `$${today.revenue}` : i === 1 ? today.orders : "SECURED"}
               </span>
             </div>
           </div>
@@ -69,66 +60,91 @@ export default async function SuperAdminDashboard() {
 
       {/* 2. Middle Section: Users & Activity */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        
-        {/* User Segmentation (Pie Chart Style but with numbers) */}
-        <div className="xl:col-span-2 glass-card p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold flex items-center gap-3"><Users className="text-secondary" /> User Demographics</h2>
-            <button className="text-xs text-primary bg-primary/10 px-4 py-2 rounded-full font-bold hover:bg-primary/20 transition-all">Manage Users</button>
+
+        {/* User Segmentation */}
+        <div className="xl:col-span-2 bg-white/[0.02] border border-white/5 p-8 rounded-[3rem]">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-xl font-black flex items-center gap-3 italic uppercase tracking-tighter">
+              <Users className="text-white/40" /> User Demographics
+            </h2>
+            <button className="text-[9px] border border-white/20 px-6 py-2 rounded-full font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">Command Center</button>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {userSegments.map((seg: any, i: any) => {
-              const roleInfo = roleMap[seg.role] || { color: "text-slate-400", bg: "bg-white/5" };
-              return (
-                <div key={i} className={`p-6 rounded-2xl ${roleInfo.bg} border border-white/5 text-center flex flex-col items-center group hover:border-white/10 transition-all`}>
-                  <div className={`text-5xl font-extrabold ${roleInfo.color} tracking-tighter group-hover:scale-110 transition-transform`}>{seg._count.id}</div>
-                  <div className={`mt-2 text-xs font-bold uppercase tracking-widest ${roleInfo.color} opacity-80`}>{seg.role}</div>
-                </div>
-              );
-            })}
+            {userSegments.map((seg: any, i: any) => (
+              <div key={i} className="p-6 rounded-[2rem] bg-white/5 border border-white/5 text-center flex flex-col items-center group hover:border-white/20 transition-all">
+                <div className="text-4xl font-black text-white tracking-tighter group-hover:scale-110 transition-transform italic">{seg._count.id}</div>
+                <div className="mt-2 text-[8px] font-black uppercase tracking-[0.3em] text-white/30">{seg.role}</div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Today's Sales Target (Visual) */}
-        <div className="glass-card p-8 flex flex-col justify-between border-primary/10 bg-gradient-to-br from-primary/5 to-transparent">
-            <h2 className="text-xl font-bold text-white/90">Today's Goal</h2>
-            <div className="text-center py-6">
-                <div className="text-sm text-slate-400">Revenue</div>
-                <div className="text-5xl font-extrabold text-primary tracking-tighter">$0</div>
-                <div className="text-xs text-secondary mt-1 font-medium">0 Orders</div>
+        {/* Today's Goal (Visual) */}
+        <div className="bg-white/[0.02] border border-white/5 p-8 rounded-[3rem] flex flex-col justify-between relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-8 opacity-5">
+            <Zap size={120} className="text-white" />
+          </div>
+          <h2 className="text-xl font-black text-white italic uppercase tracking-tighter">Daily Target</h2>
+          <div className="text-center py-6">
+            <div className="text-[9px] font-black text-white/30 uppercase tracking-[0.4em] mb-1">Inflow</div>
+            <div className="text-5xl font-black tracking-tighter italic">${today.revenue}</div>
+            <div className="text-[10px] text-white/50 mt-2 font-black uppercase tracking-widest">{today.orders} Operations</div>
+          </div>
+          <div>
+            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-3">
+              <div className="w-1/3 h-full bg-white animate-pulse"></div>
             </div>
-            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                <div className="w-1/12 h-full bg-primary animate-pulse rounded-full"></div>
-            </div>
-            <p className="text-center text-xs text-slate-500 mt-2">Start strong, Sakib!</p>
+            <p className="text-center text-[8px] font-black text-white/20 uppercase tracking-[0.6em]">Core Synchronization: Active</p>
+          </div>
         </div>
       </div>
 
       {/* 3. Recent Activity Feed */}
-      <div className="glass-card p-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold flex items-center gap-3"><Clock3 className="text-sky-400" /> Live Activity Feed</h2>
-          <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-          </span>
+      <div className="bg-white/[0.02] border border-white/5 p-8 rounded-[3rem]">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-xl font-black flex items-center gap-3 italic uppercase tracking-tighter"><Clock3 className="text-white/40" /> Live Telemetry Feed</h2>
+          <div className="flex items-center gap-3">
+            <span className="text-[8px] font-black uppercase tracking-[0.4em] text-white/40">Real-time Stream</span>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            </span>
+          </div>
         </div>
         <div className="space-y-4">
           {recentActivity.map((activity: any) => (
-            <div key={activity.id} className="flex items-center justify-between gap-4 p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group">
-              <div className="flex items-center gap-4">
-                <img src={activity.customer.image} alt={activity.customer.name} className="w-12 h-12 rounded-full border-2 border-white/10" />
+            <div key={activity.id} className="flex items-center justify-between gap-4 p-6 rounded-[2.5rem] bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all group">
+              <div className="flex items-center gap-5">
+                {activity.customer.image ? (
+                  <Image
+                    height={150}
+                    width={150}
+                    src={activity.customer.image}
+                    alt={activity.customer.name}
+                    className="w-12 h-12 rounded-2xl border border-white/10 grayscale group-hover:grayscale-0 transition-all object-cover"
+                  />
+                ) : (
+                  /* ইমেজ না থাকলে এই ডিভটি রেন্ডার হবে */
+                  <div className="w-12 h-12 rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                    <span className="text-sm font-black uppercase italic">
+                      {activity.customer.name?.charAt(0) || "U"}
+                    </span>
+                  </div>
+                )}
+
                 <div>
-                  <p className="text-white font-bold group-hover:text-primary transition-colors">{activity.customer.name}</p>
-                  <p className="text-xs text-slate-400 flex items-center gap-1.5">
-                    <Star size={12} className="text-amber-400 fill-amber-400" /> 
-                    New Order placed (ID: ...{activity.id.slice(-5)})
+                  <p className="text-white font-black italic uppercase tracking-tighter group-hover:text-white transition-colors">
+                    {activity.customer.name}
+                  </p>
+                  <p className="text-[9px] text-white/30 font-black uppercase tracking-widest mt-1 flex items-center gap-2">
+                    <Star size={10} className="text-white/40 fill-white/40" />
+                    Transaction: #{activity.id.slice(-8).toUpperCase()}
                   </p>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-lg font-bold text-white group-hover:text-secondary transition-colors">${activity.totalPrice}</div>
-                <div className="text-xs text-emerald-400 font-medium px-3 py-1 bg-emerald-500/10 rounded-full mt-1">{activity.status}</div>
+                <div className="text-xl font-black text-white italic tracking-tighter">${activity.totalPrice}</div>
+                <div className="text-[8px] text-black font-black px-4 py-1 bg-white rounded-full mt-2 uppercase tracking-tighter">{activity.status}</div>
               </div>
             </div>
           ))}

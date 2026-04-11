@@ -94,7 +94,7 @@ const LoginPage = () => {
                 <ShieldCheck size={14} className="text-red-400 group-hover:scale-110 transition-transform" /> Admin
               </button>
               <button
-                onClick={() => handleQuickLogin("customer@customer.com", "customer1234")}
+                onClick={() => handleQuickLogin("customer@customer.com", "customer123")}
                 className="group flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-white transition-all active:scale-95"
               >
                 <UserCheck size={14} className="text-blue-400 group-hover:scale-110 transition-transform" /> Customer

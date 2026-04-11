@@ -25,3 +25,16 @@ export async function updateProviderProfile(formData: { name: string, phone: str
         return { success: false, message: "Server connection failed" };
     }
 }
+
+export async function getProfile() {
+    const cookieStore = await cookies();
+    const res = await fetch(`${API_URL}/profile`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Cookie: cookieStore.toString(),
+        },
+    });
+    const data = await res.json();
+    return data;
+}

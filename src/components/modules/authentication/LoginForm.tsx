@@ -101,7 +101,7 @@ export function LoginForm(props: React.ComponentProps<typeof Card>) {
                       <FieldLabel className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                         Password
                       </FieldLabel>
-                      <button type="button" className="text-xs font-medium text-primary hover:underline">
+                      <button type="button" className="text-xs font-medium hover:underline">
                         Forgot?
                       </button>
                     </div>
@@ -152,7 +152,7 @@ export function LoginForm(props: React.ComponentProps<typeof Card>) {
 
         <CardFooter className="p-8 pt-0 flex justify-center border-t border-zinc-50 dark:border-zinc-900 mt-2">
           <p className="text-xs text-muted-foreground font-medium pt-6">
-            New here? <button className="text-primary font-bold hover:underline">Create an account</button>
+            New here? <button className="font-bold hover:underline">Create an account</button>
           </p>
         </CardFooter>
       </Card>

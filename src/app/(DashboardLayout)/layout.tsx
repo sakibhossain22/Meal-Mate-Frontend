@@ -40,7 +40,7 @@ export default async function Page({ customer, admin, provider, delivery, supera
             <div className="bg-slate-900 p-1.5 rounded-lg border border-white/10 md:hidden">
                 <SidebarTrigger className="text-slate-400" />
             </div>
-            <div className="hidden md:block">
+            <div className="hidden lg:hidden md:block">
                  <SidebarTrigger className="text-slate-400 hover:text-white transition-colors" />
             </div>
             

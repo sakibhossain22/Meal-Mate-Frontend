@@ -50,7 +50,7 @@ export default function VerifyDeliveryMan({ deliveryMenProfiles, title }: { deli
             {/* Header Section */}
             <div className="mb-12">
                 <h1 className="text-4xl font-black tracking-tighter flex items-center gap-3 italic">
-                    <Truck className="text-primary" size={40} /> {`VERIFY ${title?.toUpperCase() || "PERSONNEL"}`}
+                    <Truck className="text-white" size={40} /> {`VERIFY ${title?.toUpperCase() || "PERSONNEL"}`}
                 </h1>
                 <p className="text-slate-500 mt-1 font-medium tracking-wide">
                     Strict verification protocol for {title?.toLowerCase() || 'service providers'} in Sherpur region.
@@ -83,7 +83,7 @@ export default function VerifyDeliveryMan({ deliveryMenProfiles, title }: { deli
                                         )}
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-black tracking-tight group-hover:text-primary transition-colors">
+                                        <h3 className="text-xl font-black tracking-tight group-hover:transition-colors">
                                             {profile.user?.name || "Unknown User"}
                                         </h3>
                                         <p className="text-xs text-slate-500 font-bold flex items-center gap-1.5 mt-1 uppercase tracking-wider">
@@ -121,7 +121,7 @@ export default function VerifyDeliveryMan({ deliveryMenProfiles, title }: { deli
                                     <button
                                         onClick={() => handleAction(profile.id)}
                                         disabled={loadingId === profile.id}
-                                        className="flex-1 flex items-center justify-center gap-2 bg-secondary hover:bg-green-700 text-white font-black py-4 rounded-2xl transition-all active:scale-95 cursor-pointer text-xs uppercase tracking-widest disabled:opacity-50"
+                                        className="flex-1 flex items-center justify-center gap-2 bg-white/40 hover:bg-green-700 text-white font-black py-4 rounded-2xl transition-all active:scale-95 cursor-pointer text-xs uppercase tracking-widest disabled:opacity-50"
                                     >
                                         <ShieldCheck size={18} /> {loadingId === profile.id ? "Processing..." : `Verify ${title || 'User'}`}
                                     </button>

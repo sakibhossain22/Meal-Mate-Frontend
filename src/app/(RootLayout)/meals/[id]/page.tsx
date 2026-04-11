@@ -213,15 +213,6 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                             )}
                         </div>
 
-                        {/* Promo Banner */}
-                        <div className="relative overflow-hidden bg-gradient-to-br from-[#f22e3e] to-[#fbb200] p-8 rounded-[3rem] text-white shadow-xl shadow-[#f22e3e]/20 group">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-3xl -mr-16 -mt-16 rounded-full group-hover:scale-150 transition-transform duration-700" />
-                            <h5 className="text-2xl font-black leading-tight italic relative z-10">Hungry for Savings?</h5>
-                            <p className="mt-2 text-[10px] font-black uppercase tracking-widest opacity-90 relative z-10">Use code: MEALMATE20</p>
-                            <button className="mt-6 w-full py-3 bg-white text-black font-black text-[10px] uppercase tracking-widest rounded-2xl hover:bg-zinc-900 hover:text-white transition-colors relative z-10">
-                                Claim Discount
-                            </button>
-                        </div>
                     </aside>
 
                 </div>

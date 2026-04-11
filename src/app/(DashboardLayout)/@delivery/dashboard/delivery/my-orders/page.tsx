@@ -1,7 +1,7 @@
+import { getMyOrders } from "@/actions/delivery.action";
+import MyOrder from "@/components/dashboard/MyOrders";
+
 export default async function  MyOrders() {
-    return (
-        <div>
-            <h1>My Orders</h1>
-        </div>
-    );
+    const myOrders = await getMyOrders()
+    return <MyOrder orders={myOrders?.data} />
 }
