@@ -47,11 +47,7 @@ export default async function Cart() {
                     <p className="text-xs text-slate-500 line-clamp-1 mb-2">{item.meal.description}</p>
                     <p className="text-orange-400 font-black">${item.price}</p>
                   </div>
-                  <div className="flex flex-col md:flex-row items-center gap-3 bg-slate-950 p-2 rounded-2xl border border-slate-800">
-                    <button className="p-1 hover:text-orange-500 transition-colors"><Minus size={16} /></button>
-                    <span className="font-bold text-sm w-4 text-center">{item.quantity}</span>
-                    <button className="p-1 hover:text-orange-500 transition-colors"><Plus size={16} /></button>
-                  </div>
+                 
                   <form action={deleteCartItem.bind(null, item.id)}>
                     <button className="p-3 text-slate-600 hover:text-rose-500 hover:bg-rose-500/5 rounded-xl transition-all">
                       <Trash2 size={20} />

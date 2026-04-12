@@ -2,13 +2,14 @@ import { addToCart } from "@/actions/cart.action";
 import { getMealByCategory } from "@/actions/meal.action";
 import { mealService } from "@/app/services/meal.service";
 import { userService } from "@/app/services/userService";
+import AddToCart from "@/components/detailsPage/AddToCart";
 import ReviewForm from "@/components/ReviewForm";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ReviewType } from "@/types/index.type";
-import { 
-    ShoppingCart, Star, AlertCircle, Clock, 
-    Utensils, ShieldCheck, ArrowRight, TrendingUp 
+import {
+    ShoppingCart, Star, AlertCircle, Clock,
+    Utensils, ShieldCheck, ArrowRight, TrendingUp
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,15 +18,13 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
     const { id } = await params;
     const response = await mealService?.getSingleMealById(id);
     const data = response?.data;
-    
-    // Suggestion logic: fetching category meals and filtering current one
+
     const categoryMealsRaw = await getMealByCategory(data?.category?.name || "Pizza");
     const suggestedMeals = categoryMealsRaw
         ?.filter((m: any) => m.id !== id)
         .slice(0, 5);
 
     const session = await userService?.getSession();
-
     if (!data) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-zinc-950 p-6">
@@ -41,18 +40,16 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
         );
     }
 
-    const handleAddToCart = addToCart.bind(null, data.id, 1);
-
     return (
         <div className="bg-zinc-50 dark:bg-zinc-950 min-h-screen pb-20">
             <div className="max-w-8xl mx-auto pt-10 px-4 md:px-10">
-                
+
                 {/* --- Main Layout Wrapper --- */}
                 <div className="flex flex-col xl:flex-row gap-12 items-start">
-                    
+
                     {/* --- Left Column: Content (70%) --- */}
-                    <div className="w-full xl:w-[70%] space-y-12">
-                        
+                    <div className="w-full xl:w-[80%] space-y-12">
+
                         {/* Hero Card */}
                         <div className="bg-white dark:bg-zinc-900 rounded-[3.5rem] p-8 md:p-16 border border-zinc-100 dark:border-zinc-800 shadow-2xl flex flex-col lg:flex-row gap-16 items-center overflow-hidden relative">
                             <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#f22e3e]/5 blur-[100px] rounded-full" />
@@ -101,12 +98,7 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
 
                                 <p className="text-zinc-500 dark:text-zinc-400 text-lg font-medium italic">"{data?.description}"</p>
 
-                                <form action={handleAddToCart}>
-                                    <Button type="submit" className="group w-full md:w-auto inline-flex items-center justify-center gap-4 rounded-2xl bg-[#f22e3e] px-12 py-8 font-black text-white hover:bg-zinc-900 dark:hover:bg-white dark:hover:text-black transition-all duration-500 shadow-2xl shadow-[#f22e3e]/30 active:scale-95 cursor-pointer uppercase tracking-widest text-xs">
-                                        <ShoppingCart size={20} className="group-hover:-translate-y-1 transition-transform" />
-                                        Add To Your Plate
-                                    </Button>
-                                </form>
+                                <AddToCart user={session?.data?.user} mealId={data?.id as string} />
                             </div>
                         </div>
 
@@ -115,8 +107,8 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                             <Tabs defaultValue="review" className="w-full">
                                 <div className="flex justify-start mb-10 border-b border-zinc-200 dark:border-zinc-800">
                                     <TabsList className="bg-transparent p-0 h-auto gap-10">
-                                        <TabsTrigger className="pb-4 px-0 text-sm font-black uppercase tracking-[0.2em] data-[state=active]:text-[#f22e3e] data-[state=active]:border-b-4 border-[#f22e3e] transition-all text-zinc-400 border-b-4 border-transparent" value="description">Details</TabsTrigger>
-                                        <TabsTrigger className="pb-4 px-0 text-sm font-black uppercase tracking-[0.2em] data-[state=active]:text-[#f22e3e] data-[state=active]:border-b-4 border-[#f22e3e] transition-all text-zinc-400 border-b-4 border-transparent" value="review" >Reviews ({data?.reviews?.length || 0})</TabsTrigger>
+                                        <TabsTrigger className="pb-4 px-0 text-sm font-black uppercase tracking-[0.2em] data-[state=active]:text-[#f22e3e] data-[state=active]:border-b-4 border-[#f22e3e] transition-all text-zinc-400 border-b-4 " value="description">Details</TabsTrigger>
+                                        <TabsTrigger className="pb-4 px-0 text-sm font-black uppercase tracking-[0.2em] data-[state=active]:text-[#f22e3e] data-[state=active]:border-b-4 border-[#f22e3e] transition-all text-zinc-400 border-b-4 " value="review" >Reviews ({data?.reviews?.length || 0})</TabsTrigger>
                                     </TabsList>
                                 </div>
 
@@ -171,7 +163,7 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                     </div>
 
                     {/* --- Right Column: Suggestions (30%) --- */}
-                    <aside className="w-full xl:w-[30%] sticky top-24 space-y-8">
+                    <aside className="w-full xl:w-[20%] sticky top-24 space-y-8">
                         <div className="flex items-center justify-between px-2">
                             <h3 className="text-xl font-black uppercase tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2">
                                 <TrendingUp size={20} className="text-[#f22e3e]" /> More For You
@@ -182,14 +174,14 @@ export default async function MealDetails({ params }: { params: Promise<{ id: st
                         <div className="grid gap-5">
                             {suggestedMeals && suggestedMeals.length > 0 ? (
                                 suggestedMeals.map((meal: any) => (
-                                    <Link 
-                                        href={`/meals/${meal.id}`} 
+                                    <Link
+                                        href={`/meals/${meal.id}`}
                                         key={meal.id}
                                         className="group bg-white dark:bg-zinc-900 p-4 rounded-[2.5rem] border border-zinc-100 dark:border-zinc-800 flex items-center gap-5 hover:border-[#f22e3e]/30 hover:shadow-2xl hover:shadow-[#f22e3e]/5 transition-all duration-500"
                                     >
                                         <div className="relative w-24 h-24 bg-zinc-50 dark:bg-zinc-800/50 rounded-[2rem] overflow-hidden flex-shrink-0">
-                                            <Image 
-                                                src={meal.image || "/pizza.png"} 
+                                            <Image
+                                                src={meal.image || "/pizza.png"}
                                                 alt={meal.name}
                                                 fill
                                                 className="object-contain p-2 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500"

@@ -10,6 +10,8 @@ import * as z from "zod"
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '@/lib/firebase';
 
 const formSchema = z.object({
   password: z.string().min(8, "Minimum length is 8"),
@@ -51,10 +53,40 @@ const LoginPage = () => {
   }
 
   const loginWithGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: window.location.origin,
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result?.user;
+
+    const { data, error } = await authClient.signUp.email({
+      email: user.email as string,
+      password: user.email as string,
+      name: user?.displayName as string,
+      image: user?.photoURL as string,
+      // @ts-ignore
+      phone: "",
+      role: "CUSTOMER",
+      status: "ACTIVE"
+
+
     });
+    if (data?.user) {
+      const { data, error } = await authClient.signIn.email({
+        email: user.email as string,
+        password: user.email as string,
+      })
+      if (data?.user) {
+        router.push('/dashboard')
+      }
+      toast.error(error?.message)
+    }
+    if (error?.message === "User already exists. Use another email.") {
+      const { data, error } = await authClient.signIn.email({
+        email: user.email as string,
+        password: user.email as string,
+      })
+      if (data?.user) {
+        router.push('/dashboard')
+      }
+    }
   }
 
   return (

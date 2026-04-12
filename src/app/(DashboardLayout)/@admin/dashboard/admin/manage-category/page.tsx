@@ -59,7 +59,7 @@ export default async function ManageCategory() {
 
                                                 <div className="flex items-start gap-4">
                                                     <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden">
-                                                        {meal.image ? <Image src={meal.image} alt={meal.name} width={64} height={64} className="object-cover" /> : <UtensilsCrossed className="text-slate-700" size={24} />
+                                                        {meal.image ? <Image quality={50} src={meal.image} alt={meal.name} width={64} height={64} className="object-cover" /> : <UtensilsCrossed className="text-slate-700" size={24} />
                                                         }
                                                     </div>
                                                     <div className="flex-1">

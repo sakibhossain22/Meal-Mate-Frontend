@@ -1,12 +1,13 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { UtensilsCrossed, DollarSign, Tag, CheckCircle2, PlusCircle, Loader2, Link2, FileText } from "lucide-react";
+import { UtensilsCrossed, DollarSign, Tag, CheckCircle2, PlusCircle, Loader2, Link2, FileText, Sparkles } from "lucide-react"; // Sparkles আইকন যোগ করা হয়েছে
 import { toast } from "sonner";
-import { addMeal, getCategory } from '@/actions/meal.action';
+import { addMeal, aiMealDescription, getCategory } from '@/actions/meal.action'; // aiMealDescription ইমপোর্ট করা হয়েছে
 
 export default function AddMeal() {
   const [loading, setLoading] = useState(false);
+  const [isAiGenerating, setIsAiGenerating] = useState(false); // AI লোডিং স্টেট
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([])
 
   const [formData, setFormData] = useState({
@@ -14,9 +15,33 @@ export default function AddMeal() {
     description: "",
     price: "",
     isAvailable: true,
-    categoryId: categories[0]?.id,
+    categoryId: "",
     image: ""
   });
+    console.log("out side",formData.name)
+
+  // --- AI ডেসক্রিপশন জেনারেট করার হ্যান্ডলার ---
+  const handleAiGenerate = async () => {
+    console.log("insider",formData.name)
+    if (!formData.name) {
+      toast.error("Please enter a meal name first!");
+      return;
+    }
+
+    setIsAiGenerating(true);
+    try {
+      const aiText = await aiMealDescription(formData.name);
+      console.log(aiText)
+      if (aiText) {
+        setFormData(prev => ({ ...prev, description: aiText }));
+        toast.success("AI Description Generated!");
+      }
+    } catch (error) {
+      toast.error("AI failed to generate description");
+    } finally {
+      setIsAiGenerating(false);
+    }
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -38,6 +63,7 @@ export default function AddMeal() {
 
     fetchCategories();
   }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -61,7 +87,7 @@ export default function AddMeal() {
           description: "",
           price: "",
           isAvailable: true,
-          categoryId: "",
+          categoryId: categories[0]?.id || "",
           image: ""
         });
       } else {
@@ -86,15 +112,13 @@ export default function AddMeal() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
 
-          <div className="">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
-                <Link2 size={16} /> Meal Image URL
-              </label>
-              <input required type="url" placeholder="FooD image LInk" className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-14 px-6 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all font-mono text-xs" value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} />
-            </div>
-
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
+              <Link2 size={16} /> Meal Image URL
+            </label>
+            <input required type="url" placeholder="FooD image LInk" className="w-full bg-slate-950 border border-slate-800 rounded-2xl h-14 px-6 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all font-mono text-xs" value={formData.image} onChange={(e) => setFormData({ ...formData, image: e.target.value })} />
           </div>
+
           <div className="space-y-2">
             <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
               <UtensilsCrossed size={16} /> Meal Name
@@ -103,9 +127,26 @@ export default function AddMeal() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
-              <FileText size={16} /> Description
-            </label>
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-bold text-slate-400 flex items-center gap-2">
+                <FileText size={16} /> Description
+              </label>
+              
+              {/* --- AI Generate Button --- */}
+              <button
+                type="button"
+                onClick={handleAiGenerate}
+                disabled={isAiGenerating}
+                className="flex items-center gap-2 text-xs font-black uppercase tracking-widest px-4 py-2 bg-orange-500/10 text-orange-500 rounded-full border border-orange-500/20 hover:bg-orange-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isAiGenerating ? (
+                  <> <Loader2 size={12} className="animate-spin" /> Generating... </>
+                ) : (
+                  <> <Sparkles size={12} /> AI Magic </>
+                )}
+              </button>
+            </div>
+
             <textarea required rows={4} placeholder="Describe the taste, ingredients, and special portions..."
               className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-6 text-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} />
           </div>
@@ -134,6 +175,7 @@ export default function AddMeal() {
               </select>
             </div>
           </div>
+
           <div className="flex items-center justify-between p-6 bg-slate-950 border border-slate-800 rounded-2xl">
             <div className="flex items-center gap-3">
               <CheckCircle2 className={formData.isAvailable ? "text-orange-500" : "text-slate-700"} />

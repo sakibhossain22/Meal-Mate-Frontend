@@ -217,3 +217,34 @@ export async function getMealByCategory(category: string) {
   const data = await res.json();
   return data?.data?.meals || [];
 }
+
+export async function aiMealDescription(mealName: string) {
+
+  const res = await fetch(`${API_URL}/ai/meal-description`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ mealName }),
+  });
+
+  const data = await res.json();
+
+  // if (res.ok) revalidatePath(`/meals/${mealId}`);
+  return data?.data;
+}
+export async function aiMealRecommend(mealId: string) {
+
+  const res = await fetch(`${API_URL}/ai/meal-recommend`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ mealId }),
+  });
+
+  const data = await res.json();
+
+  // if (res.ok) revalidatePath(`/meals/${mealId}`);
+  return data?.data;
+}
